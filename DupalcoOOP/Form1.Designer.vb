@@ -104,7 +104,7 @@ Partial Class Form1
         Me.Label5.Font = New System.Drawing.Font("Persona 5 Menu Font Prototype", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label5.Location = New System.Drawing.Point(98, 208)
+        Me.Label5.Location = New System.Drawing.Point(98, 210)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(263, 64)
         Me.Label5.TabIndex = 5

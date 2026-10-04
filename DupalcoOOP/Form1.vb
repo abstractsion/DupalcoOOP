@@ -18,10 +18,12 @@ Public Class Form1
     End Sub
 
     Private Sub P5Menu1_ItemClicked(text As String) Handles P5Menu1.ItemClicked
-        If text = "EXIT" OrElse text.StartsWith("21.") Then
+        If text = "HELP" OrElse text = "BSIT2E" Then Return   ' highlight and slash only, no pop-up
+
+        If text = "EXIT" Then
             Application.Exit()
         Else
-            MessageBox.Show("You clicked: " & text)   ' your existing action goes here
+            MessageBox.Show("You clicked: " & text)
         End If
     End Sub
 

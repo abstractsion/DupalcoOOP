@@ -74,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="P5Backdrop.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Livelabel.vb">
       <SubType>Component</SubType>
     </Compile>

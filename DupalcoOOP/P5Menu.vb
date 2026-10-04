@@ -19,10 +19,12 @@ Public Class P5Menu
         Public Expanded As Boolean
         Public H As Single = 0.0F   ' hover amount 0..1 (animated)
         Public A As Single = 1.0F   ' appear amount; negative = waiting to start
+        Public F As Single = 0.0F   ' click flash 1..0
     End Class
 
     <Category("Persona Menu"), Description("Fires when an item with no sub-items is clicked. Gives you its text.")>
     Public Event ItemClicked(text As String)
+
     <Category("Persona Menu"), Description("Fires when a section opens or closes. True = a section is open.")>
     Public Event SectionToggled(isOpen As Boolean)
 
@@ -61,6 +63,11 @@ Public Class P5Menu
     Private _accent As Color = Color.FromArgb(30, 30, 255)
     Private _idleBar As Boolean = True
     Private _stagger As Boolean = True
+    Private _autoHeight As Boolean = False
+    Private _maxAutoH As Integer = 640
+    Private _dim As Boolean = True
+    Private _idleFloat As Boolean = True
+    Private _clickFlash As Boolean = True
     Private hover As Integer = -1
     Private scrollY As Integer = 0
 
@@ -68,6 +75,10 @@ Public Class P5Menu
     Private ReadOnly tmr As New System.Windows.Forms.Timer() With {.Interval = 15}
     Private ReadOnly clock As Stopwatch = Stopwatch.StartNew()
     Private lastT As Single = 0.0F
+    Private hg As Single = 0.0F                 ' "something is hovered" amount, 0..1
+    Private hasPending As Boolean = False
+    Private pendingText As String = ""
+    Private pendingAt As Single = 0.0F
 
     Public Sub New()
         SetStyle(ControlStyles.AllPaintingInWmPaint Or ControlStyles.OptimizedDoubleBuffer Or
@@ -85,6 +96,8 @@ Public Class P5Menu
             Return New Size(420, 300)
         End Get
     End Property
+
+    ' ---------------- properties ----------------
 
     <Category("Persona Menu"),
      Description("One item per line. No dash = top level. A dash (-) = inside the item above. Two dashes (--) = one level deeper."),
@@ -143,6 +156,61 @@ Public Class P5Menu
         End Set
     End Property
 
+    <Category("Persona Menu"), Description("Resize the control's height to fit the visible rows, so it never overlaps controls below it."), DefaultValue(False)>
+    Public Property AutoHeight As Boolean
+        Get
+            Return _autoHeight
+        End Get
+        Set(value As Boolean)
+            _autoHeight = value
+            Rebuild()
+        End Set
+    End Property
+
+    <Category("Persona Menu"), Description("Tallest the control may grow when AutoHeight is on. Longer lists scroll with the mouse wheel."), DefaultValue(640)>
+    Public Property MaxAutoHeight As Integer
+        Get
+            Return _maxAutoH
+        End Get
+        Set(value As Integer)
+            _maxAutoH = Math.Max(100, value)
+            Rebuild()
+        End Set
+    End Property
+
+    <Category("Persona Menu"), Description("Fade the other rows slightly while one is hovered."), DefaultValue(True)>
+    Public Property DimOthers As Boolean
+        Get
+            Return _dim
+        End Get
+        Set(value As Boolean)
+            _dim = value
+            Invalidate()
+        End Set
+    End Property
+
+    <Category("Persona Menu"), Description("Rows float very slightly and a light streak sweeps across a bar now and then."), DefaultValue(True)>
+    Public Property IdleFloat As Boolean
+        Get
+            Return _idleFloat
+        End Get
+        Set(value As Boolean)
+            _idleFloat = value
+            If value Then StartAnim()
+            Invalidate()
+        End Set
+    End Property
+
+    <Category("Persona Menu"), Description("Flash the clicked row and slash the backdrop, then fire ItemClicked about 0.16s later."), DefaultValue(True)>
+    Public Property ClickFlash As Boolean
+        Get
+            Return _clickFlash
+        End Get
+        Set(value As Boolean)
+            _clickFlash = value
+        End Set
+    End Property
+
     ' ---------------- parsing / layout ----------------
 
     Private Sub ParseText()
@@ -184,6 +252,10 @@ Public Class P5Menu
     Private Sub Rebuild()
         rows.Clear()
         AddRows(roots)
+        If _autoHeight Then
+            Dim h = Math.Min(_maxAutoH, Math.Max(_rowH, rows.Count * _rowH + 8))
+            If Height <> h Then Height = h
+        End If
         ClampScroll()
         Invalidate()
     End Sub
@@ -216,6 +288,17 @@ Public Class P5Menu
         lastT = now
 
         Dim changed = False
+
+        Dim hTarget = If(hover >= 0, 1.0F, 0.0F)
+        If hg <> hTarget Then
+            If hg < hTarget Then
+                hg = Math.Min(hTarget, hg + dt / 0.2F)
+            Else
+                hg = Math.Max(hTarget, hg - dt / 0.2F)
+            End If
+            changed = True
+        End If
+
         For i = 0 To rows.Count - 1
             Dim n = rows(i)
             Dim target = If(i = hover, 1.0F, 0.0F)
@@ -231,15 +314,33 @@ Public Class P5Menu
                 n.A = Math.Min(1.0F, n.A + dt / 0.28F)
                 changed = True
             End If
+            If n.F > 0.0F Then
+                n.F = Math.Max(0.0F, n.F - dt / 0.35F)
+                changed = True
+            End If
         Next
 
-        If changed Then Invalidate() Else tmr.Stop()
+        If hasPending Then
+            changed = True
+            If now >= pendingAt Then
+                hasPending = False
+                RaiseEvent ItemClicked(pendingText)
+            End If
+        End If
+
+        If _idleFloat Then changed = True
+
+        If changed Then
+            Invalidate()
+        Else
+            tmr.Stop()
+        End If
     End Sub
 
     Protected Overrides Sub OnHandleCreated(e As EventArgs)
         MyBase.OnHandleCreated(e)
         If Not DesignMode Then
-            ' top-level items slide in one after another when the app starts
+            ' top-level items enter one after another when the app starts
             For k = 0 To roots.Count - 1
                 roots(k).A = -0.2F * k
             Next
@@ -260,12 +361,28 @@ Public Class P5Menu
         Return Color.FromArgb(CInt(rr), CInt(gg), CInt(bb))
     End Function
 
+    ''' <summary>If this menu sits on a P5Backdrop, ask it to play a slash (found by name so there is no hard dependency).</summary>
+    Private Sub TriggerBackdropSlash()
+        Dim c As Control = Parent
+        While c IsNot Nothing
+            Dim mi = c.GetType().GetMethod("Slash", Type.EmptyTypes)
+            If mi IsNot Nothing Then
+                mi.Invoke(c, Nothing)
+                Exit While
+            End If
+            c = c.Parent
+        End While
+    End Sub
+
     ' ---------------- painting ----------------
 
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
         Dim g = e.Graphics
         g.SmoothingMode = SmoothingMode.AntiAlias
         g.TextRenderingHint = Drawing.Text.TextRenderingHint.ClearTypeGridFit
+
+        Dim live = Not DesignMode
+        Dim sec As Double = clock.ElapsedMilliseconds / 1000.0
 
         Dim f0 As New Font(Font.FontFamily, Font.Size + 3, Font.Style)
         Dim f1 As New Font(Font.FontFamily, Font.Size, Font.Style)
@@ -276,6 +393,14 @@ Public Class P5Menu
             .FormatFlags = StringFormatFlags.NoWrap
         }
 
+        ' which top-level bar gets the occasional light sweep
+        Dim sweepNode As Node = Nothing
+        Dim sweepT As Double = 2.0
+        If live AndAlso _idleFloat AndAlso roots.Count > 0 Then
+            sweepNode = roots(CInt(Math.Floor(sec / 5.5)) Mod roots.Count)
+            sweepT = (sec Mod 5.5) / 0.9
+        End If
+
         For i = 0 To rows.Count - 1
             Dim n = rows(i)
             Dim y = i * _rowH - scrollY
@@ -283,51 +408,99 @@ Public Class P5Menu
 
             Dim aRaw = Math.Max(0.0F, Math.Min(1.0F, n.A))
             If aRaw <= 0.0F Then Continue For
-            Dim ea = 1.0F - CSng(Math.Pow(1.0F - aRaw, 3))          ' ease-out for sliding in
+            Dim ea = 1.0F - CSng(Math.Pow(1.0F - aRaw, 3))              ' ease-out (for fading in)
+            Dim u = aRaw - 1.0F
+            Dim eo = 1.0F + 2.70158F * u * u * u + 1.70158F * u * u     ' ease-out with a small overshoot (for sliding)
             Dim hRaw = Math.Max(0.0F, Math.Min(1.0F, n.H))
-            Dim eh = 1.0F - (1.0F - hRaw) * (1.0F - hRaw)           ' ease-out for hover
-            Dim alpha = CInt(255 * ea)
+            Dim eh = 1.0F - (1.0F - hRaw) * (1.0F - hRaw)
 
+            ' rows that are not hovered fade a little while another row is hovered
+            Dim dimF = If(_dim AndAlso live, 1.0F - 0.35F * hg * (1.0F - eh), 1.0F)
+            Dim ea2 = ea * dimF
+            Dim alpha = CInt(255 * ea2)
+
+            Dim bob = If(_idleFloat AndAlso live AndAlso aRaw >= 1.0F, CSng(Math.Sin(sec * 1.7 + i * 0.55) * 1.6), 0.0F)
+            Dim dir = If(i Mod 2 = 0, -1.0F, 1.0F)                      ' even rows enter from the left, odd from the right
             Dim zig = If(_stagger, (i Mod 2) * 12, 0) * (1.0F - eh)
-            Dim x = CInt(8 + n.Level * 28 + zig + 16 * eh - 40 * (1.0F - ea))
+
+            Dim x = CInt(8 + n.Level * 28 + zig + 16 * eh + dir * 40 * (1.0F - eo))
             Dim w = Width - x - 24
             Dim h = _rowH - 4
-            Dim top = y + 2
+            Dim topF = y + 2 + bob
+
+            Dim bar = {New PointF(x + 12, topF), New PointF(x + w, topF),
+                       New PointF(x + w - 12, topF + h), New PointF(x, topF + h)}
 
             ' idle bar
             If _idleBar Then
-                Dim bar = {New Point(x + 12, top), New Point(x + w, top),
-                           New Point(x + w - 12, top + h), New Point(x, top + h)}
-                Using b As New SolidBrush(Color.FromArgb(CInt(If(n.Level = 0, 170, 110) * ea), _accent))
+                Using b As New SolidBrush(Color.FromArgb(CInt(If(n.Level = 0, 170, 110) * ea2), _accent))
                     g.FillPolygon(b, bar)
                 End Using
-                Using p As New Pen(Color.FromArgb(CInt(200 * ea), _accent), 1.5F)
+                Using p As New Pen(Color.FromArgb(CInt(200 * ea2), _accent), 1.5F)
                     g.DrawPolygon(p, bar)
                 End Using
+
+                ' occasional light streak across one top-level bar
+                If n Is sweepNode AndAlso sweepT < 1.0 AndAlso eh < 0.1F Then
+                    Using cp As New GraphicsPath()
+                        cp.AddPolygon(bar)
+                        g.SetClip(cp)
+                        Dim bx = x + CSng((w + 60) * sweepT) - 30
+                        Dim band = {New PointF(bx + 20, topF), New PointF(bx + 48, topF),
+                                    New PointF(bx + 28, topF + h), New PointF(bx, topF + h)}
+                        Using b As New SolidBrush(Color.FromArgb(CInt(120 * ea2), Color.White))
+                            g.FillPolygon(b, band)
+                        End Using
+                        g.ResetClip()
+                    End Using
+                End If
             End If
 
-            ' hover: white bar wipes in from the left with a colored shadow
+            ' hover: white bar wipes in, with a colored shadow, a sliding arrow and an underline
             If eh > 0.01F Then
                 Dim ww = Math.Max(16, CInt(w * eh))
-                Dim shadow = {New Point(x + 12 + 6, top + 5), New Point(x + ww + 6, top + 5),
-                              New Point(x + ww - 12 + 6, top + h + 5), New Point(x + 6, top + h + 5)}
-                Dim wbar = {New Point(x + 12, top), New Point(x + ww, top),
-                            New Point(x + ww - 12, top + h), New Point(x, top + h)}
+                Dim shadow = {New PointF(x + 12 + 6, topF + 5), New PointF(x + ww + 6, topF + 5),
+                              New PointF(x + ww - 12 + 6, topF + h + 5), New PointF(x + 6, topF + h + 5)}
+                Dim wbar = {New PointF(x + 12, topF), New PointF(x + ww, topF),
+                            New PointF(x + ww - 12, topF + h), New PointF(x, topF + h)}
                 Using b As New SolidBrush(Color.FromArgb(alpha, _accent))
                     g.FillPolygon(b, shadow)
                 End Using
                 Using b As New SolidBrush(Color.FromArgb(alpha, Color.White))
                     g.FillPolygon(b, wbar)
                 End Using
+
+                ' arrow slides in from the left
+                Dim ax = x - 8 - 16 * (1.0F - eh)
+                Dim ay = topF + h / 2.0F
+                Dim arrow = {New PointF(ax - 6, ay - 8), New PointF(ax - 6, ay + 8), New PointF(ax + 7, ay)}
+                Using b As New SolidBrush(Color.FromArgb(CInt(255 * eh * ea2), Color.White))
+                    g.FillPolygon(b, arrow)
+                End Using
+
+                ' accent underline grows under the text
+                Using pen As New Pen(Color.FromArgb(alpha, _accent), 3.0F)
+                    g.DrawLine(pen, x + 22, topF + h - 6, x + 22 + CInt(w * 0.45F * eh), topF + h - 6)
+                End Using
+            End If
+
+            ' click flash
+            If n.F > 0.01F Then
+                Using b As New SolidBrush(Color.FromArgb(CInt(220 * n.F), Color.White))
+                    g.FillPolygon(b, bar)
+                End Using
+                Using pen As New Pen(Color.FromArgb(CInt(255 * n.F), _accent), 4.0F)
+                    g.DrawPolygon(pen, bar)
+                End Using
             End If
 
             ' text
             Dim baseCol = If(n.Level >= 2, Color.FromArgb(190, 200, 255), Color.White)
-            Dim tc = Mix(baseCol, Color.Black, eh)
+            Dim tc = Mix(baseCol, Color.Black, Math.Max(eh, n.F))
             Dim fnt = If(n.Level = 0, f0, If(n.Level = 1, f1, f2))
-            Dim rect As New RectangleF(x + 18, y, Math.Max(10, w - 50), _rowH)
+            Dim rect As New RectangleF(x + 18, y + bob, Math.Max(10, w - 50), _rowH)
 
-            Dim shadowA = CInt(220 * (1.0F - eh) * ea)
+            Dim shadowA = CInt(220 * (1.0F - eh) * ea2)
             If shadowA > 4 Then
                 Dim sRect As New RectangleF(rect.X + 2, rect.Y + 2, rect.Width, rect.Height)
                 Using b As New SolidBrush(Color.FromArgb(shadowA, _accent))
@@ -338,15 +511,15 @@ Public Class P5Menu
                 g.DrawString(n.Text, fnt, b, rect, sf)
             End Using
 
-            ' arrow
+            ' expand arrow
             If n.Children.Count > 0 Then
                 Dim tx = x + w - 28
-                Dim ty = y + _rowH \ 2
-                Dim tri As Point()
+                Dim ty = y + _rowH \ 2 + bob
+                Dim tri As PointF()
                 If n.Expanded Then
-                    tri = {New Point(tx - 6, ty - 3), New Point(tx + 6, ty - 3), New Point(tx, ty + 6)}
+                    tri = {New PointF(tx - 6, ty - 3), New PointF(tx + 6, ty - 3), New PointF(tx, ty + 6)}
                 Else
-                    tri = {New Point(tx - 3, ty - 6), New Point(tx - 3, ty + 6), New Point(tx + 6, ty)}
+                    tri = {New PointF(tx - 3, ty - 6), New PointF(tx - 3, ty + 6), New PointF(tx + 6, ty)}
                 End If
                 Using b As New SolidBrush(Color.FromArgb(alpha, Mix(Color.White, Color.Black, eh)))
                     g.FillPolygon(b, tri)
@@ -385,6 +558,11 @@ Public Class P5Menu
     End Sub
 
     Protected Overrides Sub OnMouseClick(e As MouseEventArgs)
+        If hasPending Then
+            MyBase.OnMouseClick(e)
+            Return
+        End If
+
         If hover >= 0 AndAlso hover < rows.Count Then
             Dim n = rows(hover)
             If n.Children.Count > 0 Then
@@ -395,16 +573,26 @@ Public Class P5Menu
                     For Each s In siblings
                         If s IsNot n Then s.Expanded = False
                     Next
-                    ' children slide in one after another
+                    ' children enter one after another
                     For k = 0 To n.Children.Count - 1
                         n.Children(k).A = -0.12F * Math.Min(k, 8)
                     Next
                 End If
                 Rebuild()
                 RaiseEvent SectionToggled(roots.Any(Function(r) r.Expanded))
+                If Not DesignMode Then TriggerBackdropSlash()
                 StartAnim()
             Else
-                RaiseEvent ItemClicked(n.Text)
+                If _clickFlash AndAlso Not DesignMode Then
+                    n.F = 1.0F
+                    pendingText = n.Text
+                    pendingAt = clock.ElapsedMilliseconds / 1000.0F + 0.16F
+                    hasPending = True
+                    TriggerBackdropSlash()
+                    StartAnim()
+                Else
+                    RaiseEvent ItemClicked(n.Text)
+                End If
             End If
         End If
         MyBase.OnMouseClick(e)

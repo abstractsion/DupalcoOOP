@@ -23,13 +23,31 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Me.P5Backdrop1 = New DupalcoOOP.P5Backdrop()
         Me.P5Menu1 = New DupalcoOOP.P5Menu()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.P5Plate2 = New DupalcoOOP.P5Plate()
+        Me.P5Plate1 = New DupalcoOOP.P5Plate()
+        Me.P5Plate3 = New DupalcoOOP.P5Plate()
+        Me.P5Plate4 = New DupalcoOOP.P5Plate()
+        Me.P5Backdrop1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'P5Backdrop1
+        '
+        Me.P5Backdrop1.AccentColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Backdrop1.BackColor = System.Drawing.Color.Black
+        Me.P5Backdrop1.BackgroundArt = Global.DupalcoOOP.My.Resources.Resources._41e3d16b2aaf512abf1fcceb5099656a
+        Me.P5Backdrop1.Controls.Add(Me.P5Plate4)
+        Me.P5Backdrop1.Controls.Add(Me.P5Plate3)
+        Me.P5Backdrop1.Controls.Add(Me.P5Plate2)
+        Me.P5Backdrop1.Controls.Add(Me.P5Plate1)
+        Me.P5Backdrop1.Controls.Add(Me.P5Menu1)
+        Me.P5Backdrop1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.P5Backdrop1.Location = New System.Drawing.Point(0, 0)
+        Me.P5Backdrop1.Name = "P5Backdrop1"
+        Me.P5Backdrop1.Size = New System.Drawing.Size(1184, 661)
+        Me.P5Backdrop1.TabIndex = 6
+        Me.P5Backdrop1.UseWaitCursor = True
         '
         'P5Menu1
         '
@@ -37,79 +55,88 @@ Partial Class Form1
         Me.P5Menu1.BackColor = System.Drawing.Color.Transparent
         Me.P5Menu1.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.P5Menu1.Font = New System.Drawing.Font("Segoe UI", 11.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle))
-        Me.P5Menu1.Location = New System.Drawing.Point(-10, 12)
+        Me.P5Menu1.Location = New System.Drawing.Point(50, 40)
         Me.P5Menu1.MenuText = resources.GetString("P5Menu1.MenuText")
         Me.P5Menu1.Name = "P5Menu1"
         Me.P5Menu1.Size = New System.Drawing.Size(380, 460)
         Me.P5Menu1.TabIndex = 0
-        Me.P5Menu1.Text = "P5Menu1"
+        Me.P5Menu1.Text = "V"
         Me.P5Menu1.UseWaitCursor = True
         '
-        'Label2
+        'P5Plate2
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Bauhaus 93", 24.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(12, 282)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(445, 36)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "Object Oriented Programming"
-        Me.Label2.UseWaitCursor = True
+        Me.P5Plate2.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate2.BackColor = System.Drawing.Color.Transparent
+        Me.P5Plate2.Font = New System.Drawing.Font("Segoe UI", 28.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle))
+        Me.P5Plate2.ForeColor = System.Drawing.Color.White
+        Me.P5Plate2.ImageDarken = 140
+        Me.P5Plate2.Location = New System.Drawing.Point(30, 350)
+        Me.P5Plate2.Name = "P5Plate2"
+        Me.P5Plate2.OutlineColor = System.Drawing.Color.Black
+        Me.P5Plate2.OutlineWidth = 3
+        Me.P5Plate2.PlateColor = System.Drawing.Color.White
+        Me.P5Plate2.PlateImage = Nothing
+        Me.P5Plate2.Size = New System.Drawing.Size(661, 127)
+        Me.P5Plate2.StartDelay = 600
+        Me.P5Plate2.TabIndex = 3
+        Me.P5Plate2.TabStop = False
+        Me.P5Plate2.Text = "Object Oriented Programming"
+        Me.P5Plate2.Tilt = 2.0!
         '
-        'Label3
+        'P5Plate1
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 14.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(150, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(135, 447)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(168, 25)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Dupalco, Justin C."
-        Me.Label3.UseWaitCursor = True
+        Me.P5Plate1.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate1.BackColor = System.Drawing.Color.Transparent
+        Me.P5Plate1.Font = New System.Drawing.Font("Segoe UI", 36.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.P5Plate1.ForeColor = System.Drawing.Color.Black
+        Me.P5Plate1.Location = New System.Drawing.Point(200, 225)
+        Me.P5Plate1.Name = "P5Plate1"
+        Me.P5Plate1.OutlineColor = System.Drawing.Color.Black
+        Me.P5Plate1.PlateColor = System.Drawing.Color.White
+        Me.P5Plate1.PlateImage = Nothing
+        Me.P5Plate1.PlateShape = DupalcoOOP.P5PlateShape.Ransom
+        Me.P5Plate1.Size = New System.Drawing.Size(347, 158)
+        Me.P5Plate1.StartDelay = 300
+        Me.P5Plate1.TabIndex = 2
+        Me.P5Plate1.TabStop = False
+        Me.P5Plate1.Text = "PF-101"
         '
-        'Label1
+        'P5Plate3
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 24.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(170, 237)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(133, 45)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "PF-101 "
-        Me.Label1.UseWaitCursor = True
+        Me.P5Plate3.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate3.BackColor = System.Drawing.Color.Transparent
+        Me.P5Plate3.Font = New System.Drawing.Font("Segoe UI", 21.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.P5Plate3.ForeColor = System.Drawing.Color.White
+        Me.P5Plate3.Location = New System.Drawing.Point(179, 460)
+        Me.P5Plate3.Name = "P5Plate3"
+        Me.P5Plate3.OutlineColor = System.Drawing.Color.Black
+        Me.P5Plate3.PlateColor = System.Drawing.Color.Black
+        Me.P5Plate3.PlateImage = Nothing
+        Me.P5Plate3.PlateShape = DupalcoOOP.P5PlateShape.Ransom
+        Me.P5Plate3.Size = New System.Drawing.Size(235, 119)
+        Me.P5Plate3.StartDelay = 900
+        Me.P5Plate3.TabIndex = 5
+        Me.P5Plate3.TabStop = False
+        Me.P5Plate3.Text = "SBIT2E"
         '
-        'Label4
+        'P5Plate4
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Bauhaus 93", 24.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(158, 402)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(112, 36)
-        Me.Label4.TabIndex = 4
-        Me.Label4.Text = "SBIT2E"
-        Me.Label4.UseWaitCursor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Persona 5 Menu Font Prototype", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label5.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label5.Location = New System.Drawing.Point(98, 210)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(263, 64)
-        Me.Label5.TabIndex = 5
-        Me.Label5.Text = "PF-101 "
-        Me.Label5.UseWaitCursor = True
+        Me.P5Plate4.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate4.BackColor = System.Drawing.Color.Transparent
+        Me.P5Plate4.Font = New System.Drawing.Font("Segoe UI", 28.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle))
+        Me.P5Plate4.ForeColor = System.Drawing.Color.White
+        Me.P5Plate4.Location = New System.Drawing.Point(59, 549)
+        Me.P5Plate4.Name = "P5Plate4"
+        Me.P5Plate4.OutlineColor = System.Drawing.Color.Black
+        Me.P5Plate4.PlateColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(45, Byte), Integer))
+        Me.P5Plate4.PlateImage = Nothing
+        Me.P5Plate4.PlateShape = DupalcoOOP.P5PlateShape.Ribbon
+        Me.P5Plate4.Size = New System.Drawing.Size(462, 127)
+        Me.P5Plate4.StartDelay = 1200
+        Me.P5Plate4.TabIndex = 7
+        Me.P5Plate4.TabStop = False
+        Me.P5Plate4.Text = "Dupalco, Justin C."
+        Me.P5Plate4.Tilt = 3.0!
         '
         'Form1
         '
@@ -117,26 +144,20 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.DupalcoOOP.My.Resources.Resources._41e3d16b2aaf512abf1fcceb5099656a
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(686, 464)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.P5Menu1)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ClientSize = New System.Drawing.Size(1184, 661)
+        Me.Controls.Add(Me.P5Backdrop1)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.UseWaitCursor = True
+        Me.P5Backdrop1.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
+    Friend WithEvents P5Backdrop1 As P5Backdrop
+    Friend WithEvents P5Plate2 As P5Plate
+    Friend WithEvents P5Plate1 As P5Plate
     Friend WithEvents P5Menu1 As P5Menu
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents P5Plate3 As P5Plate
+    Friend WithEvents P5Plate4 As P5Plate
 End Class

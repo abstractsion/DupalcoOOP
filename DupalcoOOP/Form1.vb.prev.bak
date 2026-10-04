@@ -1,0 +1,696 @@
+Option Strict On
+Option Explicit On
+
+Imports System.Drawing
+Imports System.Windows.Forms
+Imports System.Collections.Generic
+
+Public Class Form1
+    Inherits Form
+
+    ' Theme colors (design tokens)
+    Private ReadOnly Theme_Background As Color = Color.FromArgb(8, 11, 18) ' near-black
+    Private ReadOnly Theme_Card As Color = Color.FromArgb(16, 23, 34) ' panels
+    Private ReadOnly Theme_Primary As Color = Color.FromArgb(21, 45, 77) ' deep blue
+    Private ReadOnly Theme_Accent As Color = Color.FromArgb(22, 119, 255) ' electric blue
+    Private ReadOnly Theme_AccentBright As Color = Color.FromArgb(45, 140, 255)
+    Private ReadOnly Theme_Text As Color = Color.FromArgb(235, 240, 245)
+    Private ReadOnly Theme_SubText As Color = Color.FromArgb(170, 180, 195)
+    Private ReadOnly Theme_Border As Color = Color.FromArgb(30, 50, 80)
+
+    ' Root layout controls
+    Private navPanel As Panel
+    Private navFlow As FlowLayoutPanel
+    Private pnlHeader As Panel
+    Private lblContext As Label
+    Private pnlContent As Panel
+
+    ' Helper lesson classes (kept)
+    Public Class Person
+        Public Property Name As String
+        Public Property Age As Integer
+        Public Sub New()
+            Name = String.Empty
+            Age = 0
+        End Sub
+    End Class
+
+    Public Class BankAccount
+        Private balance As Decimal = 0D
+        Public Sub Deposit(amount As Decimal)
+            If amount <= 0D Then Throw New ArgumentException("Deposit amount must be positive.")
+            balance += amount
+        End Sub
+        Public Function Withdraw(amount As Decimal) As Boolean
+            If amount <= 0D Then Return False
+            If amount > balance Then Return False
+            balance -= amount
+            Return True
+        End Function
+        Public Function GetBalance() As Decimal
+            Return balance
+        End Function
+    End Class
+
+    Public Class Animal
+        Public Overridable Function Speak() As String
+            Return "(animal sound)"
+        End Function
+    End Class
+
+    Public Class Dog
+        Inherits Animal
+        Public Overrides Function Speak() As String
+            Return "Dog barks"
+        End Function
+    End Class
+
+    ' Constructor
+    Public Sub New()
+        MyBase.New()
+        Me.Text = "PF101 - Object Oriented Programming Created by: Lastname, Firstname M.I."
+        Me.ClientSize = New Size(1100, 740)
+        Me.MinimumSize = New Size(900, 640)
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.BackColor = Theme_Background
+        Me.Font = New Font("Segoe UI", 9.0F)
+
+        BuildUI()
+        ShowDashboard()
+    End Sub
+
+    ' Build application shell: sidebar, header, content
+    Private Sub BuildUI()
+        ' Sidebar
+        navPanel = New Panel() With {
+            .Dock = DockStyle.Left,
+            .Width = 260,
+            .BackColor = Color.FromArgb(12, 16, 28),
+            .Padding = New Padding(10)
+        }
+        Me.Controls.Add(navPanel)
+
+        ' Brand
+        Dim lblBrand As New Label() With {
+            .Text = "PF101",
+            .Font = New Font("Segoe UI", 16.0F, FontStyle.Bold),
+            .ForeColor = Theme_Text,
+            .AutoSize = True,
+            .Location = New Point(12, 10)
+        }
+        navPanel.Controls.Add(lblBrand)
+
+        Dim lblSub As New Label() With {
+            .Text = "Object Oriented Programming",
+            .Font = New Font("Segoe UI", 9.0F),
+            .ForeColor = Theme_SubText,
+            .AutoSize = True,
+            .Location = New Point(12, 40)
+        }
+        navPanel.Controls.Add(lblSub)
+
+        ' Nav flow
+        navFlow = New FlowLayoutPanel() With {
+            .Dock = DockStyle.Fill,
+            .FlowDirection = FlowDirection.TopDown,
+            .WrapContents = False,
+            .AutoScroll = True,
+            .Padding = New Padding(6),
+            .BackColor = Color.Transparent
+        }
+        navPanel.Controls.Add(navFlow)
+
+        ' Helper to create nav button
+        Dim makeNavButton As Func(Of String, Action, Button) = Function(text, act)
+                                                                   Dim b As New Button() With {
+                                                                        .Text = text,
+                                                                        .Height = 44,
+                                                                        .Dock = DockStyle.Top,
+                                                                        .FlatStyle = FlatStyle.Flat,
+                                                                        .BackColor = Color.Transparent,
+                                                                        .ForeColor = Theme_SubText,
+                                                                        .TextAlign = ContentAlignment.MiddleLeft,
+                                                                        .Padding = New Padding(12, 0, 0, 0),
+                                                                        .Font = New Font("Segoe UI", 9.0F, FontStyle.Regular),
+                                                                        .TabStop = False
+                                                                    }
+                                                                   b.FlatAppearance.BorderSize = 0
+                                                                   AddHandler b.Click, Sub(s, e)
+                                                                                           ' clear selection
+                                                                                           For Each c As Control In navFlow.Controls
+                                                                                               If TypeOf c Is Button Then
+                                                                                                   c.BackColor = Color.Transparent
+                                                                                                   c.ForeColor = Theme_SubText
+                                                                                               End If
+                                                                                           Next
+                                                                                           b.BackColor = Theme_Primary
+                                                                                           b.ForeColor = Theme_Text
+                                                                                           act.Invoke()
+                                                                                       End Sub
+                                                                   AddHandler b.MouseEnter, Sub(s, e) If b.BackColor = Color.Transparent Then b.ForeColor = Theme_Text
+                                                                   AddHandler b.MouseLeave, Sub(s, e) If b.BackColor = Color.Transparent Then b.ForeColor = Theme_SubText
+                                                                   Return b
+                                                               End Function
+
+        ' Top-level nav items
+        navFlow.Controls.Add(makeNavButton("Dashboard", AddressOf ShowDashboard))
+        navFlow.Controls.Add(makeNavButton("Orientations", AddressOf ShowOrientations))
+
+        ' Introduction in OOP as expandable-like group (simple header + sub items)
+        Dim lblOop As New Label() With {.Text = "Introduction in OOP", .ForeColor = Theme_Text, .AutoSize = False, .Height = 28, .Padding = New Padding(6, 6, 0, 0), .Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)}
+        navFlow.Controls.Add(lblOop)
+        navFlow.Controls.Add(makeNavButton("  Classes and Objects", Sub() ShowIntro_OOP("Classes and Objects")))
+        navFlow.Controls.Add(makeNavButton("  Encapsulation", Sub() ShowIntro_OOP("Encapsulation")))
+        navFlow.Controls.Add(makeNavButton("  Inheritance", Sub() ShowIntro_OOP("Inheritance")))
+        navFlow.Controls.Add(makeNavButton("  Polymorphism", Sub() ShowIntro_OOP("Polymorphism")))
+
+        navFlow.Controls.Add(makeNavButton("Getting Started with Microsoft VB.NET", AddressOf ShowGettingStarted))
+        navFlow.Controls.Add(makeNavButton("Planning Applications & Designing Interfaces", AddressOf ShowPlanning))
+        navFlow.Controls.Add(makeNavButton("Data Handling", AddressOf ShowDataHandling))
+        navFlow.Controls.Add(makeNavButton("Coding: Selection & Repetition", AddressOf ShowCodingSelectionRepetition))
+        navFlow.Controls.Add(makeNavButton("Arrays", AddressOf ShowArrays))
+        navFlow.Controls.Add(makeNavButton("Controls and Properties", AddressOf ShowControlsProperties))
+        navFlow.Controls.Add(makeNavButton("Midterm Examinations", AddressOf ShowMidterm))
+
+        navFlow.Controls.Add(makeNavButton("Animation", Sub() ShowAnimationMenu()))
+
+        navFlow.Controls.Add(makeNavButton("Help", Sub() ShowHelp()))
+        navFlow.Controls.Add(makeNavButton("Section", Sub() ' intentionally no-op
+                                                      End Sub))
+
+        ' Exit pinned at bottom
+        Dim btnExit As New Button() With {
+            .Text = "Exit",
+            .Height = 44,
+            .Dock = DockStyle.Bottom,
+            .FlatStyle = FlatStyle.Flat,
+            .BackColor = Color.Transparent,
+            .ForeColor = Theme_SubText,
+            .TextAlign = ContentAlignment.MiddleLeft,
+            .Padding = New Padding(12, 0, 0, 0)
+        }
+        btnExit.FlatAppearance.BorderSize = 0
+        AddHandler btnExit.Click, Sub(s, e) Me.Close()
+        navPanel.Controls.Add(btnExit)
+
+        ' Header
+        pnlHeader = New Panel() With {.Dock = DockStyle.Top, .Height = 72, .BackColor = Theme_Background, .Padding = New Padding(16, 12, 16, 8)}
+        Me.Controls.Add(pnlHeader)
+        lblContext = New Label() With {.Text = "Dashboard", .Font = New Font("Segoe UI", 12.0F, FontStyle.Bold), .ForeColor = Theme_Text, .AutoSize = True, .Location = New Point(8, 8)}
+        pnlHeader.Controls.Add(lblContext)
+
+        ' Content panel
+        pnlContent = New Panel() With {.Dock = DockStyle.Fill, .Padding = New Padding(16), .BackColor = Theme_Background, .AutoScroll = True}
+        Me.Controls.Add(pnlContent)
+    End Sub
+
+    ' Utility: create styled primary button
+    Private Function CreatePrimaryButton(text As String, act As Action) As Button
+        Dim b As New Button() With {
+            .Text = text,
+            .AutoSize = False,
+            .Size = New Size(140, 36),
+            .FlatStyle = FlatStyle.Flat,
+            .BackColor = Theme_Accent,
+            .ForeColor = Color.Black,
+            .Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+        }
+        b.FlatAppearance.BorderSize = 0
+        AddHandler b.Click, Sub(s, e) act.Invoke()
+        Return b
+    End Function
+
+    ' Utility: create secondary button
+    Private Function CreateSecondaryButton(text As String, act As Action) As Button
+        Dim b As New Button() With {
+            .Text = text,
+            .AutoSize = False,
+            .Size = New Size(140, 36),
+            .FlatStyle = FlatStyle.Flat,
+            .BackColor = Theme_Primary,
+            .ForeColor = Theme_Text
+        }
+        b.FlatAppearance.BorderSize = 0
+        AddHandler b.Click, Sub(s, e) act.Invoke()
+        Return b
+    End Function
+
+    ' Utility: create card panel with accent bar and title
+    Private Function CreateCard(title As String, subtitle As String, height As Integer) As Panel
+        Dim p As New Panel() With {.Dock = DockStyle.Top, .Height = height, .BackColor = Theme_Card, .Padding = New Padding(12), .Margin = New Padding(0, 8, 0, 8)}
+        Dim accent As New Panel() With {.BackColor = Theme_Accent, .Width = 6, .Dock = DockStyle.Left}
+        p.Controls.Add(accent)
+        Dim lblTitle As New Label() With {.Text = title, .Font = New Font("Segoe UI", 11.0F, FontStyle.Bold), .ForeColor = Theme_Text, .AutoSize = True, .Location = New Point(14, 8)}
+        p.Controls.Add(lblTitle)
+        If Not String.IsNullOrEmpty(subtitle) Then
+            Dim lblSub As New Label() With {.Text = subtitle, .Font = New Font("Segoe UI", 9.0F), .ForeColor = Theme_SubText, .AutoSize = True, .Location = New Point(14, 34)}
+            p.Controls.Add(lblSub)
+        End If
+        Return p
+    End Function
+
+    ' DASHBOARD
+    Private Sub ShowDashboard()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Dashboard"
+
+        Dim welcome As New Panel() With {.Dock = DockStyle.Top, .Height = 120, .BackColor = Theme_Card, .Padding = New Padding(16), .Margin = New Padding(0, 8, 0, 12)}
+        Dim lblWelcome As New Label() With {.Text = "Welcome to PF101", .Font = New Font("Segoe UI", 16.0F, FontStyle.Bold), .ForeColor = Theme_Text, .AutoSize = True, .Location = New Point(8, 8)}
+        Dim lblDesc As New Label() With {.Text = "This application contains lessons, examples, code samples and interactive demonstrations for the course.", .Font = New Font("Segoe UI", 10.0F), .ForeColor = Theme_SubText, .AutoSize = True, .Location = New Point(8, 44)}
+        welcome.Controls.Add(lblWelcome)
+        welcome.Controls.Add(lblDesc)
+        pnlContent.Controls.Add(welcome)
+
+        ' Cards container
+        Dim cardsFlow As New FlowLayoutPanel() With {.Dock = DockStyle.Fill, .FlowDirection = FlowDirection.LeftToRight, .WrapContents = True, .AutoScroll = True, .Padding = New Padding(8)}
+        pnlContent.Controls.Add(cardsFlow)
+
+        ' Helper to create dashboard card
+        Dim addCard As Action(Of String, String, Action) = Sub(title, desc, act)
+                                                               Dim c As New Panel() With {.Size = New Size(320, 120), .BackColor = Theme_Card, .Padding = New Padding(12), .Margin = New Padding(8), .Cursor = Cursors.Hand}
+                                                               Dim accent As New Panel() With {.BackColor = Theme_Accent, .Width = 6, .Dock = DockStyle.Left}
+                                                               c.Controls.Add(accent)
+                                                               Dim lblT As New Label() With {.Text = title.ToUpper(), .Font = New Font("Segoe UI", 10.0F, FontStyle.Bold), .ForeColor = Theme_Text, .Location = New Point(14, 8), .AutoSize = True}
+                                                               Dim lblD As New Label() With {.Text = desc, .Font = New Font("Segoe UI", 9.0F), .ForeColor = Theme_SubText, .Location = New Point(14, 36), .AutoSize = True}
+                                                               c.Controls.Add(lblT)
+                                                               c.Controls.Add(lblD)
+                                                               AddHandler c.Click, Sub(s, e) act.Invoke()
+                                                               ' also make label clicks bubble
+                                                               AddHandler lblT.Click, Sub(s, e) act.Invoke()
+                                                               AddHandler lblD.Click, Sub(s, e) act.Invoke()
+                                                               ' hover
+                                                               AddHandler c.MouseEnter, Sub(s, e) c.BackColor = Color.FromArgb(20, 30, 44)
+                                                               AddHandler c.MouseLeave, Sub(s, e) c.BackColor = Theme_Card
+                                                               cardsFlow.Controls.Add(c)
+                                                           End Sub
+
+        addCard("Orientations", "Course orientation and policies.", AddressOf ShowOrientations)
+        addCard("Introduction in OOP", "Classes, encapsulation, inheritance and polymorphism.", Sub() ShowIntro_OOP("Classes and Objects"))
+        addCard("Getting Started with VB.NET", "What programming is, IDE tour and console examples.", AddressOf ShowGettingStarted)
+        addCard("Planning Applications & Designing Interfaces", "Designing forms, controls and events.", AddressOf ShowPlanning)
+        addCard("Data Handling", "Variables, types, conversions, operators.", AddressOf ShowDataHandling)
+        addCard("Coding: Selection & Repetition", "If/Select Case, loops, string handling.", AddressOf ShowCodingSelectionRepetition)
+        addCard("Arrays", "One-dimensional, multi-dimensional, passing arrays.", AddressOf ShowArrays)
+        addCard("Controls and Properties", "Dialogs and runtime control demos.", AddressOf ShowControlsProperties)
+        addCard("Midterm Examinations", "[MIDTERM CONTENT - TO BE PROVIDED]", AddressOf ShowMidterm)
+        addCard("Animation", "Level 1 and Level 2 (placeholders).", AddressOf ShowAnimationMenu)
+    End Sub
+
+    ' Animation menu placeholder page
+    Private Sub ShowAnimationMenu()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Animation"
+
+        Dim card As Panel = CreateCard("Animation", "Level 1 and Level 2", 220)
+        pnlContent.Controls.Add(card)
+        Dim rtb As New RichTextBox() With {.Dock = DockStyle.Fill, .BackColor = Theme_Card, .ForeColor = Theme_Text, .ReadOnly = True, .Text = "Animation lessons: Level 1 and Level 2 (placeholders for future content)."}
+        card.Controls.Add(rtb)
+
+        Dim flow As New FlowLayoutPanel() With {.Dock = DockStyle.Bottom, .Height = 64, .Padding = New Padding(8), .FlowDirection = FlowDirection.LeftToRight}
+        Dim btnL1 = CreatePrimaryButton("Level 1", Sub() ShowAnimation_Level1())
+        Dim btnL2 = CreatePrimaryButton("Level 2", Sub() ShowAnimation_Level2())
+        flow.Controls.Add(btnL1)
+        flow.Controls.Add(btnL2)
+        pnlContent.Controls.Add(flow)
+    End Sub
+
+    ' HELP placeholder
+    Private Sub ShowHelp()
+        MessageBox.Show("Help content will be provided by the instructor.", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
+    ' ----- Lesson pages (structured content, interactive where applicable) -----
+
+    ' Generic structured lesson builder
+    Private Function BuildLessonPage(title As String, subtitle As String, sections As List(Of Tuple(Of String, String)), codeText As String, runner As Action(Of RichTextBox), Optional extra As Action(Of Panel) = Nothing) As Panel
+        Dim root As New Panel() With {.Dock = DockStyle.Fill, .AutoScroll = True, .BackColor = Theme_Background}
+        Dim header As Panel = CreateCard(title, subtitle, 90)
+        root.Controls.Add(header)
+
+        ' content layout: left = sections + code, right = output + extra
+        Dim mainTbl As New TableLayoutPanel() With {.Dock = DockStyle.Top, .AutoSize = False, .ColumnCount = 2, .RowCount = 1, .Height = 640}
+        mainTbl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 68.0F))
+        mainTbl.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 32.0F))
+        root.Controls.Add(mainTbl)
+
+        ' left column
+        Dim left As New Panel() With {.Dock = DockStyle.Fill, .Padding = New Padding(8), .AutoScroll = True}
+        mainTbl.Controls.Add(left, 0, 0)
+
+        ' Sections as cards
+        For Each sec In sections
+            Dim secCard As Panel = CreateCard(sec.Item1, "", 120)
+            Dim rtbSec As New RichTextBox() With {.Dock = DockStyle.Fill, .BackColor = Theme_Card, .ForeColor = Theme_Text, .ReadOnly = True, .Text = sec.Item2, .Font = New Font("Segoe UI", 9.5F), .BorderStyle = BorderStyle.None, .Padding = New Padding(8)}
+            secCard.Controls.Add(rtbSec)
+            left.Controls.Add(secCard)
+        Next
+
+        ' Code card
+        If Not String.IsNullOrEmpty(codeText) Then
+            Dim codeCard As New Panel() With {.Dock = DockStyle.Top, .Height = 260, .BackColor = Color.FromArgb(6, 10, 20), .Padding = New Padding(8)}
+            Dim lblCodeHeader As New Label() With {.Text = "Code", .Font = New Font("Segoe UI", 9.0F, FontStyle.Bold), .ForeColor = Theme_SubText, .Dock = DockStyle.Top, .Height = 20}
+            codeCard.Controls.Add(lblCodeHeader)
+            Dim rtbCode As New RichTextBox() With {.Dock = DockStyle.Fill, .ReadOnly = True, .Font = New Font("Consolas", 10.0F), .BackColor = Color.FromArgb(4, 6, 12), .ForeColor = Theme_Text, .BorderStyle = BorderStyle.None, .Text = codeText}
+            codeCard.Controls.Add(rtbCode)
+            left.Controls.Add(codeCard)
+        End If
+
+        ' right column
+        Dim right As New Panel() With {.Dock = DockStyle.Fill, .Padding = New Padding(8)}
+        mainTbl.Controls.Add(right, 1, 0)
+
+        ' Output card
+        Dim outCard As New Panel() With {.Dock = DockStyle.Top, .Height = 220, .BackColor = Color.FromArgb(6, 8, 16), .Padding = New Padding(8)}
+        right.Controls.Add(outCard)
+        Dim lblOut As New Label() With {.Text = "Output", .Font = New Font("Segoe UI", 9.0F, FontStyle.Bold), .ForeColor = Theme_SubText, .Dock = DockStyle.Top, .Height = 20}
+        outCard.Controls.Add(lblOut)
+        Dim rtbOutput As New RichTextBox() With {.Dock = DockStyle.Fill, .ReadOnly = True, .Font = New Font("Consolas", 10.0F), .BackColor = Color.FromArgb(4, 6, 12), .ForeColor = Theme_Text, .BorderStyle = BorderStyle.None}
+        outCard.Controls.Add(rtbOutput)
+
+        ' Run button
+        Dim btnRun As Button = CreatePrimaryButton("Run ?", Sub()
+                                                                Try
+                                                                    runner(rtbOutput)
+                                                                Catch ex As Exception
+                                                                    rtbOutput.AppendText("Error: " & ex.Message & vbCrLf)
+                                                                End Try
+                                                            End Sub)
+        right.Controls.Add(btnRun)
+
+        ' Extra area (if any) placed below
+        If extra IsNot Nothing Then
+            Dim extraArea As New Panel() With {.Dock = DockStyle.Fill, .AutoScroll = True, .BackColor = Color.Transparent}
+            right.Controls.Add(extraArea)
+            extra(extraArea)
+        End If
+
+        Return root
+    End Function
+
+    ' ----- Concrete lesson implementations using BuildLessonPage -----
+
+    Private Sub ShowOrientations()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Orientations"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Orientation", "[ORIENTATION CONTENT - TO BE PROVIDED]"))
+        Dim runner As Action(Of RichTextBox) = Sub(rtb) rtb.Text = "No runnable example for Orientations."
+        pnlContent.Controls.Add(BuildLessonPage("Orientations", "Course orientation", sections, "' No code provided", runner))
+    End Sub
+
+    Private Sub ShowIntro_OOP(topic As String)
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Introduction in OOP / " & topic
+        Dim sections As New List(Of Tuple(Of String, String))
+        If topic = "Classes and Objects" Then
+            sections.Add(Tuple.Create("What is it?", "A class is a blueprint. An object is an instance created by instantiation."))
+            sections.Add(Tuple.Create("Key concepts", "CLASS: blueprint" & vbCrLf & "OBJECT: instance" & vbCrLf & "INSTANTIATION: creating an object"))
+            Dim code = "' Sample: Person class usage" & vbCrLf &
+                       "Dim p As New Person()" & vbCrLf &
+                       "p.Name = ""Alice""" & vbCrLf &
+                       "p.Age = 30" & vbCrLf &
+                       "Console.WriteLine($""Name: {p.Name}, Age: {p.Age}"")"
+            Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                       Dim p As New Person() With {.Name = "Alice", .Age = 30}
+                                                       rtb.Clear()
+                                                       rtb.AppendText($"Name: {p.Name}, Age: {p.Age}" & vbCrLf)
+                                                   End Sub
+            pnlContent.Controls.Add(BuildLessonPage("Introduction - Classes and Objects", "OOP Fundamentals", sections, code, runner))
+        ElseIf topic = "Encapsulation" Then
+            sections.Add(Tuple.Create("What is it?", "Encapsulation bundles data and methods, hides internal state, and exposes functionality through well-defined members."))
+            sections.Add(Tuple.Create("Key concepts", "Private state" & vbCrLf & "Public methods to interact with state"))
+            Dim code = "' BankAccount class (excerpt)" & vbCrLf &
+                       "Public Class BankAccount" & vbCrLf &
+                       "    Private balance As Decimal" & vbCrLf &
+                       "    Public Sub Deposit(amount As Decimal)" & vbCrLf &
+                       "        ' validation inside" & vbCrLf &
+                       "    End Sub" & vbCrLf &
+                       "    Public Function GetBalance() As Decimal" & vbCrLf &
+                       "        Return balance" & vbCrLf &
+                       "    End Function" & vbCrLf &
+                       "End Class"
+            Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                       rtb.Clear()
+                                                       rtb.AppendText("Use the Deposit / Withdraw / Balance Inquiry controls on the right." & vbCrLf)
+                                                   End Sub
+            ' Extra interactive controls
+            Dim extra As Action(Of Panel) = Sub(parent)
+                                                parent.Controls.Clear()
+                                                Dim flow As New FlowLayoutPanel() With {.Dock = DockStyle.Top, .AutoSize = True, .Padding = New Padding(6)}
+                                                parent.Controls.Add(flow)
+                                                Dim lblAmt As New Label() With {.Text = "Amount:", .AutoSize = True, .ForeColor = Theme_Text}
+                                                Dim txtAmt As New TextBox() With {.Width = 120}
+                                                Dim btnPanel As New FlowLayoutPanel() With {.FlowDirection = FlowDirection.LeftToRight, .AutoSize = True}
+                                                Dim btnDeposit = CreatePrimaryButton("Deposit", Sub()
+                                                                                                    Dim a As Decimal
+                                                                                                    If Decimal.TryParse(txtAmt.Text.Trim(), a) AndAlso a > 0D Then
+                                                                                                        DirectCast(flow.Tag, BankAccount).Deposit(a)
+                                                                                                        lblAmt.Text = "Deposited " & a.ToString("C2") & " — Balance: " & DirectCast(flow.Tag, BankAccount).GetBalance().ToString("C2")
+                                                                                                    Else
+                                                                                                        lblAmt.Text = "Invalid deposit amount."
+                                                                                                    End If
+                                                                                                End Sub)
+                                                Dim btnWithdraw = CreatePrimaryButton("Withdraw", Sub()
+                                                                                                      Dim a As Decimal
+                                                                                                      If Decimal.TryParse(txtAmt.Text.Trim(), a) AndAlso a > 0D Then
+                                                                                                          Dim ok = DirectCast(flow.Tag, BankAccount).Withdraw(a)
+                                                                                                          If ok Then
+                                                                                                              lblAmt.Text = "Withdrew " & a.ToString("C2") & " — Balance: " & DirectCast(flow.Tag, BankAccount).GetBalance().ToString("C2")
+                                                                                                          Else
+                                                                                                              lblAmt.Text = "Withdraw failed."
+                                                                                                          End If
+                                                                                                      Else
+                                                                                                          lblAmt.Text = "Invalid withdraw amount."
+                                                                                                      End If
+                                                                                                  End Sub)
+                                                Dim btnBalance = CreateSecondaryButton("Balance", Sub()
+                                                                                                      lblAmt.Text = "Balance: " & DirectCast(flow.Tag, BankAccount).GetBalance().ToString("C2")
+                                                                                                  End Sub)
+                                                flow.Tag = New BankAccount()
+                                                flow.Controls.Add(lblAmt)
+                                                flow.Controls.Add(txtAmt)
+                                                btnPanel.Controls.AddRange(New Control() {btnDeposit, btnWithdraw, btnBalance})
+                                                flow.Controls.Add(btnPanel)
+                                            End Sub
+            pnlContent.Controls.Add(BuildLessonPage("Introduction - Encapsulation", "OOP Fundamentals", sections, code, runner, extra))
+        ElseIf topic = "Inheritance" Then
+            sections.Add(Tuple.Create("What is it?", "Inheritance lets a class derive from another and reuse or override behavior."))
+            sections.Add(Tuple.Create("Key concepts", "Base class / Derived class" & vbCrLf & "Overridable and Overrides"))
+            Dim code = "' Animal and Dog sample" & vbCrLf &
+                       "Public Class Animal" & vbCrLf &
+                       "    Public Overridable Function Speak() As String" & vbCrLf &
+                       "        Return ""(animal sound)""" & vbCrLf &
+                       "    End Function" & vbCrLf &
+                       "End Class" & vbCrLf &
+                       "Public Class Dog" & vbCrLf &
+                       "    Inherits Animal" & vbCrLf &
+                       "    Public Overrides Function Speak() As String" & vbCrLf &
+                       "        Return ""Dog barks""" & vbCrLf &
+                       "    End Function" & vbCrLf &
+                       "End Class"
+            Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                       Dim a As Animal = New Dog()
+                                                       rtb.Clear()
+                                                       rtb.AppendText(a.Speak() & vbCrLf)
+                                                   End Sub
+            pnlContent.Controls.Add(BuildLessonPage("Introduction - Inheritance", "OOP Fundamentals", sections, code, runner))
+        ElseIf topic = "Polymorphism" Then
+            sections.Add(Tuple.Create("What is it?", "Polymorphism allows using a base reference to hold derived objects and call overridden members."))
+            sections.Add(Tuple.Create("Key concepts", "Base reference holding derived object" & vbCrLf & "Runtime method resolution"))
+            Dim code = "' Polymorphism example" & vbCrLf &
+                       "Dim a As Animal = New Dog()" & vbCrLf &
+                       "Console.WriteLine(a.Speak()) ' prints Dog barks"
+            Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                       Dim a As Animal = New Dog()
+                                                       rtb.Clear()
+                                                       rtb.AppendText(a.Speak() & vbCrLf)
+                                                   End Sub
+            pnlContent.Controls.Add(BuildLessonPage("Introduction - Polymorphism", "OOP Fundamentals", sections, code, runner))
+        End If
+    End Sub
+
+    Private Sub ShowGettingStarted()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Getting Started with Microsoft VB.NET"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Programming", "What programming is: writing instructions for a computer to perform tasks."))
+        sections.Add(Tuple.Create("Languages & Compilers", "High-level languages, machine language, compilers and translators."))
+        sections.Add(Tuple.Create("Program parts", "Keywords, operators, variables, syntax, statements, procedures, comments (apostrophe)."))
+        sections.Add(Tuple.Create("IDE", "Start Page, New Project, Menu Bar, Standard Toolbar, Toolbox, Solution Explorer, Properties, Form Designer, Output / Error List / Command windows, Auto Hide, ToolTips, docked vs floating windows."))
+        sections.Add(Tuple.Create("Console Applications", "Console applications and System.Console. Console samples are simulated in the output box."))
+        Dim code = "' Console demonstration (shown as Console.WriteLine in the code sample)" & vbCrLf &
+                   "Console.WriteLine(""Hello, World"")" & vbCrLf &
+                   "Console.WriteLine($""2 + 3 = {2 + 3}"")"
+        Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                   rtb.Clear()
+                                                   rtb.AppendText("Hello, World" & vbCrLf)
+                                                   rtb.AppendText("2 + 3 = 5" & vbCrLf)
+                                               End Sub
+        pnlContent.Controls.Add(BuildLessonPage("Getting Started with Microsoft VB.NET", "VB.NET Fundamentals", sections, code, runner))
+    End Sub
+
+    Private Sub ShowPlanning()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Planning Applications & Designing Interfaces"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Properties", "Controls have properties, methods and events. Set at design-time or run-time (Object.Property = Value)."))
+        sections.Add(Tuple.Create("Methods & Events", "Example: MessageBox.Show. Events like Form1_Load (Handles MyBase.Load)."))
+        sections.Add(Tuple.Create("Common controls", "Form, TextBox, Label, Button, ListBox, ComboBox, RadioButton, CheckBox, PictureBox, ProgressBar, ScrollBar, DateTimePicker."))
+        sections.Add(Tuple.Create("Layout & Navigation", "Anchor vs Dock. TabIndex and TabStop for keyboard navigation."))
+        Dim code = "' Example Form Load handler" & vbCrLf &
+                   "Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load" & vbCrLf &
+                   "    MessageBox.Show(""Form loaded"")" & vbCrLf &
+                   "End Sub"
+        Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                   rtb.Clear()
+                                                   rtb.AppendText("MessageBox.Show sample not run here. See Form Load events." & vbCrLf)
+                                               End Sub
+        pnlContent.Controls.Add(BuildLessonPage("Planning Applications and Designing Interfaces", "Design & Controls", sections, code, runner))
+    End Sub
+
+    Private Sub ShowDataHandling()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Data Handling"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Variables", "Variables and memory; naming rules; Dim declarations."))
+        sections.Add(Tuple.Create("Types & Constants", "Data types; Const and named constants; type-declaration characters (D, R, I, L, S, F)."))
+        sections.Add(Tuple.Create("Conversions", "Implicit vs explicit conversion; Convert and Parse; ToString formats."))
+        sections.Add(Tuple.Create("Operators & Precedence", "Arithmetic operators (+ - * / ^ \ Mod); order of precedence; assignment operators (+=, -=)."))
+        Dim code = "' Exponent example" & vbCrLf &
+                   "Dim baseValue As Double = 2.0" & vbCrLf &
+                   "Dim power As Double = 3.0" & vbCrLf &
+                   "Console.WriteLine(Math.Pow(baseValue, power))"
+        Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                   Dim baseValue As Double = 2.0
+                                                   Dim power As Double = 3.0
+                                                   rtb.Clear()
+                                                   rtb.AppendText($"{baseValue}^{power} = {Math.Pow(baseValue, power):N0}" & vbCrLf)
+                                               End Sub
+        pnlContent.Controls.Add(BuildLessonPage("Data Handling", "Variables & Types", sections, code, runner))
+    End Sub
+
+    Private Sub ShowCodingSelectionRepetition()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Selection and Repetition"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Selection", "If / ElseIf / Else; relational operators; Boolean flags; nested If; Select Case."))
+        sections.Add(Tuple.Create("Logical Operators", "And, Or, Xor, Not, AndAlso, OrElse (with truth tables)."))
+        sections.Add(Tuple.Create("String handling", "Comparison, String.Empty, ToUpper, ToLower, IsNumeric, Length, Trim."))
+        sections.Add(Tuple.Create("Loops", "Do While; For...Next; nested loops."))
+        Dim code = "' If example" & vbCrLf &
+                   "Dim score As Integer = 75" & vbCrLf &
+                   "If score >= 90 Then" & vbCrLf &
+                   "    Console.WriteLine(""A"")" & vbCrLf &
+                   "ElseIf score >= 80 Then" & vbCrLf &
+                   "    Console.WriteLine(""B"")" & vbCrLf &
+                   "ElseIf score >= 70 Then" & vbCrLf &
+                   "    Console.WriteLine(""C"")" & vbCrLf &
+                   "Else" & vbCrLf &
+                   "    Console.WriteLine(""Fail"")" & vbCrLf &
+                   "End If"
+        Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                   Dim score As Integer = 75
+                                                   Dim grade As String
+                                                   If score >= 90 Then
+                                                       grade = "A"
+                                                   ElseIf score >= 80 Then
+                                                       grade = "B"
+                                                   ElseIf score >= 70 Then
+                                                       grade = "C"
+                                                   Else
+                                                       grade = "Fail"
+                                                   End If
+                                                   rtb.Clear()
+                                                   rtb.AppendText($"Score {score} ? Grade {grade}" & vbCrLf)
+                                               End Sub
+        pnlContent.Controls.Add(BuildLessonPage("Coding with Variable Names, Constants and Calculations", "Selection & Repetition", sections, code, runner))
+    End Sub
+
+    Private Sub ShowArrays()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Arrays"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Characteristics", "Array characteristics; Dim name(upper) As Type; default initialization; implicit sizing with { }."))
+        sections.Add(Tuple.Create("Usage", "Named-constant subscripts; one-dimensional and two-dimensional arrays; multi-dimensional arrays."))
+        sections.Add(Tuple.Create("Functions & Arrays", "Functions (including Return); passing arrays to procedures; returning an array from a function."))
+        Dim code = "' Months array example" & vbCrLf &
+                   "Dim months() As String = {""January"", ""February"", ""March"", ""April"", ""May"", ""June"", ""July"", ""August"", ""September"", ""October"", ""November"", ""December""}" & vbCrLf &
+                   "For i As Integer = 0 To months.Length - 1" & vbCrLf &
+                   "    Console.WriteLine(months(i))" & vbCrLf &
+                   "Next"
+        Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                   rtb.Clear()
+                                                   Dim months() As String = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}
+                                                   For i As Integer = 0 To months.Length - 1
+                                                       rtb.AppendText(months(i) & vbCrLf)
+                                                   Next
+                                               End Sub
+        pnlContent.Controls.Add(BuildLessonPage("Arrays", "Collections of values", sections, code, runner))
+    End Sub
+
+    Private Sub ShowControlsProperties()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Working with Controls and Properties"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Dialogs", "Dialog boxes: CommonDialog, ShowDialog, DialogResult values."))
+        sections.Add(Tuple.Create("Common dialogs", "ColorDialog, FontDialog, OpenFileDialog, SaveFileDialog, PrintDialog."))
+        sections.Add(Tuple.Create("TreeView/ListView", "[TREEVIEW / LISTVIEW CONTENT - NOT IN SLIDES]"))
+        Dim code = "' Example: ColorDialog usage" & vbCrLf &
+                   "If colorDlg.ShowDialog() = DialogResult.OK Then" & vbCrLf &
+                   "    myLabel.ForeColor = colorDlg.Color" & vbCrLf &
+                   "End If"
+        Dim runner As Action(Of RichTextBox) = Sub(rtb)
+                                                   rtb.Clear()
+                                                   rtb.AppendText("Use the Choose Color / Choose Font buttons on the right to change the sample label." & vbCrLf)
+                                               End Sub
+        ' Extra interactive area: color/font demos
+        Dim extra As Action(Of Panel) = Sub(parent)
+                                            parent.Controls.Clear()
+                                            Dim flow As New FlowLayoutPanel() With {.Dock = DockStyle.Top, .AutoSize = True, .Padding = New Padding(6)}
+                                            parent.Controls.Add(flow)
+                                            Dim demoLabel As New Label() With {.Text = "Sample Text", .AutoSize = True, .Font = New Font("Segoe UI", 12.0F), .ForeColor = Theme_Text}
+                                            flow.Controls.Add(demoLabel)
+                                            Dim btnPanel As New FlowLayoutPanel() With {.FlowDirection = FlowDirection.LeftToRight, .AutoSize = True}
+                                            Dim btnColor = CreatePrimaryButton("Choose Color", Sub()
+                                                                                                   Dim cd As New ColorDialog()
+                                                                                                   If cd.ShowDialog() = DialogResult.OK Then demoLabel.ForeColor = cd.Color
+                                                                                               End Sub)
+                                            Dim btnFont = CreatePrimaryButton("Choose Font", Sub()
+                                                                                                 Dim fd As New FontDialog()
+                                                                                                 If fd.ShowDialog() = DialogResult.OK Then demoLabel.Font = fd.Font
+                                                                                             End Sub)
+                                            btnPanel.Controls.AddRange(New Control() {btnColor, btnFont})
+                                            flow.Controls.Add(btnPanel)
+                                        End Sub
+        pnlContent.Controls.Add(BuildLessonPage("Working with Controls and Properties", "Dialogs & Controls", sections, code, runner, extra))
+    End Sub
+
+    Private Sub ShowMidterm()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Lessons / Midterm Examinations"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Midterm", "[MIDTERM CONTENT - TO BE PROVIDED]"))
+        Dim runner As Action(Of RichTextBox) = Sub(rtb) rtb.Text = "Midterm details to be provided by instructor."
+        pnlContent.Controls.Add(BuildLessonPage("Midterm Examinations", "Exam content", sections, "", runner))
+    End Sub
+
+    ' ----- Animation placeholders (Level 1 & 2) -----
+    Private Sub ShowAnimation_Level1()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Animation / Level 1"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Level 1", "[LEVEL 1 GAME - PLACEHOLDER]. Game content will be specified later."))
+        Dim runner As Action(Of RichTextBox) = Sub(rtb) rtb.Text = "Level 1 placeholder."
+        pnlContent.Controls.Add(BuildLessonPage("Animation - Level 1", "Placeholder", sections, "", runner))
+    End Sub
+
+    Private Sub ShowAnimation_Level2()
+        pnlContent.Controls.Clear()
+        lblContext.Text = "Animation / Level 2"
+        Dim sections As New List(Of Tuple(Of String, String))
+        sections.Add(Tuple.Create("Level 2", "[LEVEL 2 GAME - TO BE SPECIFIED]"))
+        Dim runner As Action(Of RichTextBox) = Sub(rtb) rtb.Text = "Level 2 placeholder."
+        pnlContent.Controls.Add(BuildLessonPage("Animation - Level 2", "Placeholder", sections, "", runner))
+    End Sub
+
+End Class

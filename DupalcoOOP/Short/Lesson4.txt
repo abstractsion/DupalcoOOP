@@ -1,0 +1,39 @@
+LESSON 4: PLANNING APPLICATIONS AND DESIGNING INTERFACES
+
+THE THREE PARTS OF A CONTROL
+- Properties describe the object (for example Text, ForeColor).
+- Methods make the object do something.
+- Events are what happens when the object does something (for example Click).
+
+PROPERTIES
+A property is a value held by an object. Set it at design time in the Properties window, or at run time in code.
+
+Example:
+Button1.Text = "Save"
+Button1.Enabled = False
+
+METHODS
+A method is a procedure that makes an object do something.
+
+Example:
+MessageBox.Show("Hello, World")
+
+EVENTS
+An event is a signal that something happened, like a click, load, resize or close. A procedure handles it.
+
+Example:
+Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Me.Text = "My App"
+End Sub
+Handles MyBase.Load means this sub runs when the form loads. The handler name can be changed.
+
+BASIC CONTROLS
+VB.NET controls live in System.Windows.Forms. Common ones: Label, TextBox, Button, CheckBox, RadioButton, ListBox, ComboBox, PictureBox.
+
+TAB ORDER
+- TabIndex sets the order controls get focus when you press Tab. Lower numbers come first.
+- TabStop must be True for a control to be in the tab order.
+
+ANCHORING AND DOCKING
+- Anchor keeps a control a fixed distance from the form's edges as it resizes (default is Top, Left).
+- Dock makes a control fill an edge or the whole form.

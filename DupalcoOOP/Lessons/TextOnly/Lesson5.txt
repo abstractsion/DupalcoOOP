@@ -1,0 +1,356 @@
+﻿LESSON 5
+DATA HANDLING
+============================================================
+
+IN THIS LESSON
+  • Handling Data
+  • Types of Data
+  • Naming Rules
+  • Declaring Variables
+  • Declaring Constants
+  • Scope
+  • Converting Data Types
+  • Arithmetic Operators
+  • Assignment Operators
+
+
+------------------------------------------------------------
+SLIDE 2  –  Learning Outcomes
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• 1. Differentiate Types of Variables
+• 2. Explain different uses of Variables
+• 3. Define Constant, Modifiers, Statement and Directives
+• 4. Enumerate Visual Basic Operators and Data types
+
+------------------------------------------------------------
+SLIDE 3  –  Handling Data
+------------------------------------------------------------
+
+• Variables
+• Provide a means to store data values that are not stored in files.
+• Support the computation of values through their use in formulas in assignment statements.  - Represent locations in a computer's memory.
+• are assigned a unique name for reference when writing computer code
+
+      num1 = Val(BaseTxt.Text)
+      expo = Val(PowerTxt.Text)
+      xresult = Math.Pow(num1, expo)
+      'xresult = num1 ^ expo
+      Powerlbl.Text = Str(PowerTxt.Text)
+      Powerlbl.Text = Str(PowerTxt.Text)
+      ResultTxt.Text = (xresult)
+      Baselbl.Text = (Str(BaseTxt.Text) + " = " + Str(ResultTxt.Text))
+
+
+------------------------------------------------------------
+SLIDE 4  –  Handling Data (cont.)
+------------------------------------------------------------
+
+• This figure illustrates the concept of a variable name associated with locations in random access memory.
+• Values are stored to memory locations (represented by the rectangle).
+• The stored values can vary over time.
+• Each memory location is assigned a unique variable name that is used to reference the location when you write a program.
+
+------------------------------------------------------------
+SLIDE 5  –  Handling Data (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 6  –  Types of Data
+------------------------------------------------------------
+
+• VB provides numerous data types to allow programmers to optimize the use of computer memory.  Each data type is described in the table shown here.  Note the:
+• Data type name.
+• Description of data stored.
+• Memory storage requirement in bytes.
+
+------------------------------------------------------------
+SLIDE 7  –  Types of Data (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 8  –  Types of Data (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 9  –  Types of Data (cont.)
+------------------------------------------------------------
+
+• Most business applications primarily use String, Decimal, Single, and Integer data types. Here are examples of data that may be stored to computer memory:
+• Customer Name – String – Stores alphabetic characters.
+• Social Security Number – String – Numbers that are not used in computations.
+• Customer Number – String – Numbers that are not used in computations.
+
+------------------------------------------------------------
+SLIDE 10  –  Types of Data (cont.)
+------------------------------------------------------------
+
+• Balance Due – Decimal – Used in calculations and often requires a decimal point to separate dollars and cents.
+• Quantity in Inventory – Integer or Short – Selection depends on how large the quantity in inventory will be, but the quantity is usually a whole number.
+• Sales Tax Rate – Single or Decimal – Used to store a percentage value; also used for scientific calculations.
+
+------------------------------------------------------------
+SLIDE 11  –  Naming Rules for Variables and Constants
+------------------------------------------------------------
+
+• You as the programmer decide what to name variables and constants – there are technical rules you must follow when creating variable and constant names.
+• Names can include letters, digits, and the underscore, but must begin with a letter.
+• Names cannot contain spaces or periods.
+
+------------------------------------------------------------
+SLIDE 12  –  Naming Rules for Variables and Constants (cont.)
+------------------------------------------------------------
+
+• Names cannot be VB reserved words such as LET, PRINT, DIM, or CONST.
+• Names are not case sensitive.  This means that TotalInteger, TOTALINTEGER, and totalinteger are all equivalent names.
+• For all intensive purposes, a Name can be as long as you want (the actual limit is 16,383 characters in length).
+
+------------------------------------------------------------
+SLIDE 13  –  Declaring Variables
+------------------------------------------------------------
+
+• Declare variables that are local with the Dim statement.  Declare variables that are module-level with the Private statement.
+• Dim statement – use this to declare variables and constants inside a procedure these are local variables.
+• The Dim statement needs to specify a variable/constant name and data type.
+• Specifying an initial value for a variable is optional.
+• Constants must have an initial value specified.
+
+------------------------------------------------------------
+SLIDE 14  –  Examples:
+------------------------------------------------------------
+
+
+      Dim StudentNameString As String
+      Dim CountStudentsInteger As Integer
+      Dim AccountBalanceDecimal As Decimal = 100D
+
+• You can also declare more than one variable in a Dim statement.
+
+      Dim StudentNameString, MajorString As String
+      Dim SubtotalDecimal, TotalDecimal, TaxAmountDueDecimal As Decimal
+
+
+------------------------------------------------------------
+SLIDE 15  –  Declaring Constants
+------------------------------------------------------------
+
+• Declare constants with the Const statement.
+• Constants are similar to variables – constants are values that are stored to memory locations; however, a constant cannot have its value change during program execution – constant values are generally fixed over time.
+• Examples:  sales tax rate or name of one of the states in the United States.
+
+------------------------------------------------------------
+SLIDE 16  –  Declaring Constants (cont.)
+------------------------------------------------------------
+
+• VB has two different types of constants.
+• Intrinsic Constants – these are defined as enumerations such as Color.Red and Color.Blue.  These are called intrinsic because they are predefined in VB and always exist for your use.
+• Named Constants – these are constants you define with a Const statement.  These constants are specific to your programming application.
+
+------------------------------------------------------------
+SLIDE 17  –  Declaring Constants (cont.)
+------------------------------------------------------------
+
+• Examples:
+
+      Const SALES_TAX_RATE_SINGLE As Single = 0.0725F
+      Const BIG_STATE_NAME_STRING As String = "Alaska"
+      Const TITLE_STRING As String = "Data Entry Error"
+      Const MAX_SIZE_INTEGER As Integer = 4000
+
+• String (text or character) constants are assigned values within the " " (double quote) marks.  This statement stores double-quote marks as part of the string – do this by typing two double-quote marks together.
+
+------------------------------------------------------------
+SLIDE 18  –  Declaring Constants (cont.)
+------------------------------------------------------------
+
+
+      Const COURSE_TITLE_STRING As String = "Programming Visual Basic"
+
+• Numeric constants like those shown above do NOT use double-quote marks – just type the numeric value numbers.  Follow these rules for assigning numeric values to constants:
+• You can use numbers, a decimal point, and a plus (+) or minus (-) sign.
+• Do not include special characters such as a comma, dollar sign, or other special characters.
+
+------------------------------------------------------------
+SLIDE 19  –  Declaring Constants (cont.)
+------------------------------------------------------------
+
+• Append one of these characters to the end of the numeric constant or variable to denote a data type declaration.  If you do not use these, a whole number is assumed to be Integer and a fractional value is assumed to be Double.
+• Decimal 		D	40.45D
+• Double 		R	12576.877R
+• Integer 		I	47852I
+• Long 			L	9888444222L
+• Short 			S	2588S
+• Single 		F	0.0725F
+
+------------------------------------------------------------
+SLIDE 20  –  Scope of Variables and Constants
+------------------------------------------------------------
+
+• Each variable (or constant) has a finite lifetime and visibility – termed the Scope. The variable lifetime is how long the variable exists before the computer operating system garbage-collects the memory allocated to the stored value.
+• There are four levels of scope.
+• Namespace (use a Public Shared declaration instead of Dim) – the variable is visible within the entire project (applicable to a project with multiple forms).
+
+------------------------------------------------------------
+SLIDE 21  –  Scope of Variables and Constants (cont.)
+------------------------------------------------------------
+
+  – The variable is project-wide and can be used in any procedure in any form in the project.
+  – The variable memory allocation is garbage-collected when application execution terminates.
+• Modulelevel (usually use Private to declare the variable; use Const to declare the constant) – a variable/constant can be used in any procedure on a specific form – it is not visible to other Forms.
+  – Use module-level variables when the values that are stored in their memory locations are used in more than one procedure (click event or other type of procedure).
+
+------------------------------------------------------------
+SLIDE 22  –  Scope of Variables and Constants (cont.)
+------------------------------------------------------------
+
+• A module-level variable or constant is created (allocated memory) when a form loads into memory and the variable or constant remains in memory until the form is unloaded.
+• Local (use Dim to declare the variable; use Const to declare the constant) – a variable/constant is declared and used only within a single procedure.
+  – Variable lifetime is the period for which a variable exists.
+  – When a procedure executes, such as when you click on a button control, each variable and constant declared as local within the procedure executes, "uncreated" when the procedure executes the End Sub statement.
+  – Each time you click the button, a new set of variables and constants are created.
+
+------------------------------------------------------------
+SLIDE 23  –  Scope of Variables and Constants (cont.)
+------------------------------------------------------------
+
+• Block (use Dim to declare the variable; use Const to declare the constant) – the variable/constant is only visible within a small portion of a procedure – these variables/constants are rarely created.
+
+------------------------------------------------------------
+SLIDE 24  –  Scope of Variables and Constants (cont.)
+------------------------------------------------------------
+
+• This figure illustrates where to declare local versus module-level variables/constants.  Later you will learn to declare namespace and block variables and constants and when to use the Public keyword in place of Private.
+
+------------------------------------------------------------
+SLIDE 25  –  Scope of Variables and Constants (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 26  –  Converting Output Data Types
+------------------------------------------------------------
+
+• In order to display numeric variable values as output the values must be converted from numeric data types to string in order to store the data to the Text property of a TextBox control.  Use the ToString method.  These examples show converting strings to a numeric representation with 2 digits to the right of the decimal (N2) and currency with 2 digits to the right of the decimal (C2) as well as no digits to the right of a number (N0 – that is N zero, not N Oh).
+
+------------------------------------------------------------
+SLIDE 27  –  Converting Output Data Types (cont.)
+------------------------------------------------------------
+
+
+      SubtotalTextBox.Text = SubtotalDecimal.ToString("N2")
+      SalesTaxTextBox.Text = SalesTaxDecimal.ToString("C2")
+      QuantityTextBox.Text = QuantityInteger.ToString("N0")
+
+
+------------------------------------------------------------
+SLIDE 28  –  Converting Output Data Types (cont.)
+------------------------------------------------------------
+
+• Implicit Conversion – this is conversion by VB from a narrower to wider data type (less memory to more memory) – this is done automatically as there is no danger of losing any precision.  In this example, an integer (4 bytes) is converted to a double (8 bytes):
+• BiggerNumberDouble = SmallerNumberInteger
+
+------------------------------------------------------------
+SLIDE 29  –  Converting Output Data Types (cont.)
+------------------------------------------------------------
+
+• Explicit Conversion – this is also called Casting and is used to convert between numeric data types that do not support implicit conversion.  This table shows use of the Convert method to convert one numeric data type to another numeric data type.  Note that fractional values are rounded when converting to integer.
+
+------------------------------------------------------------
+SLIDE 30  –  Converting Output Data Types (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 31  –  Converting Output Data Types (cont.)
+------------------------------------------------------------
+
+• Use the Parse method to convert a string to a number Performing Calculations – VB uses a wider data type when calculations include unlike data types or to parse the value in a textbox control.
+• This example produces a decimal result.
+• AverageSaleDecimal = TotalSalesDecimal / CountInteger
+• Summary Rules:
+• Use the Convert method to convert a type of number to a different type of number.
+
+------------------------------------------------------------
+SLIDE 32  –  Arithmetic Operators
+------------------------------------------------------------
+
+• The arithmetic operators are the same as in many other programming languages. They are:
+• +  Addition
+• Subtraction
+• * Multiplication
+• /   Division
+• ^   Exponentiation
+• \   Integer Division
+• Mod  Modulus Division
+
+------------------------------------------------------------
+SLIDE 33  –  Arithmetic Operators (cont.)
+------------------------------------------------------------
+
+• Exponentiation – This raises a number to the specified power – the result produced is data type Double.  Example:
+• ValueSquaredDouble = NumberDecimal ^ 2
+• ValueCubedDouble = NumberDecimal ^ 3
+
+------------------------------------------------------------
+SLIDE 34  –  Arithmetic Operators (cont.)
+------------------------------------------------------------
+
+• Integer Division – Divide one integer by another leaving an integer result and discarding the remainder, if any.  Example:
+• If the variable MinutesInteger= 130, then this expression returns the value of 2 hours.
+• HoursInteger = MinutesInteger \ 60
+
+------------------------------------------------------------
+SLIDE 35  –  Arithmetic Operators (cont.)
+------------------------------------------------------------
+
+• Modulus Division – This returns the remainder of a division operation.  Using the same value for MinutesInteger= 500, this expression returns the value 20 minutes and can be used to calculate the amount of overtime worked for an 8-hour work day.
+• MinutesInteger = MinutesInteger Mod 60
+
+------------------------------------------------------------
+SLIDE 36  –  Order of Precedence
+------------------------------------------------------------
+
+• The order of precedence for expressions that have more than one operation is the same as for other programming languages.
+• Evaluate values and calculation symbols in this order:
+• (1) Values enclosed inside parentheses
+• (2) Exponentiation
+• (3) Multiplication and Division
+• (4) Integer Division
+• (5) Modulus Division
+• (6) Addition and Subtraction
+
+------------------------------------------------------------
+SLIDE 37  –  Assignment Operators and Formulas
+------------------------------------------------------------
+
+• The equal sign is the assignment operator.  It means store the value of the expression on the right side of the equal sign to the memory variable named on the left side of the equal sign.  Examples:
+• ItemValueDecimal = QuantityInteger * PriceDecimal
+• HoursWorkedSingle = MinutesWorkedSingle / 60F
+• NetProfitDecimal = GrossSalesDecimal – CostGoodsSoldDecimal
+
+------------------------------------------------------------
+SLIDE 38  –  Assignment Operators and Formulas (cont.)
+------------------------------------------------------------
+
+• The plus symbol combined with the equal sign allows you to accumulate a value in a memory variable.  Examples
+• TotalSalesDecimal += SaleAmountDecimal
+• is equivalent to the following – it means take the current value of TotalSalesDecimaland add to it the value of SaleAmountDecimal and store it back to TotalSalesDecimal(it gets bigger and BIGGER).
+• TotalSalesDecimal = TotalSalesDecimal + SaleAmountDecimal
+
+------------------------------------------------------------
+SLIDE 39  –  Assignment Operators and Formulas (cont.)
+------------------------------------------------------------
+
+• The minus symbol combined with the equal sign allows you to decrement or count backwards.  Examples:
+• CountInteger -= 1
+• is equivalent to
+• CountInteger = CountInteger - 1

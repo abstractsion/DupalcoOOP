@@ -74,6 +74,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="LessonForm.Designer.vb">
+      <DependentUpon>LessonForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LessonForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OopLesson.Designer.vb">
+      <DependentUpon>OopLesson.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OopLesson.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="P5Backdrop.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -110,11 +122,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LessonForm.resx">
+      <DependentUpon>LessonForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OopLesson.resx">
+      <DependentUpon>OopLesson.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

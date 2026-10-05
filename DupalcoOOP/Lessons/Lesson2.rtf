@@ -1,0 +1,70 @@
+{\rtf1\ansi\ansicpg1252\uc1\deff0
+{\fonttbl{\f0\fswiss\fcharset0 Segoe UI;}{\f1\fmodern\fcharset0 Consolas;}}
+{\colortbl ;\red255\green255\blue255;\red140\green175\blue255;\red255\green214\blue120;\red130\green210\blue150;\red205\green210\blue230;\red255\green165\blue120;}
+\viewkind4\uc1\pard\f0\fs26\cf1
+\pard\sa60\f0\fs20\b\cf2 LESSON 2\b0\par
+\pard\sa200\b\fs44\cf1 Introduction to OOP\b0\par
+\pard\sa80\b\fs26\cf2 In this lesson\b0\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab OOP Overview\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab Classes and Objects\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab Encapsulation\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab Inheritance\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab Polymorphism\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab Interfaces\par
+\pard\tx360\li360\fi-360\sa40\fs24\cf1 \u8226?\tab Wrap-up\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 2\par
+\pard\sa120\keepn\b\fs34\cf2 Learning Outcomes\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab At the end of the session, the students should be able to:\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Explain Object-Oriented Programming in Visual Basic\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Understand Classes and Objectsin Visual Basic.NET\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Understand Encapsulation in Visual Basic.NET\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Understand Inheritance in Visual Basic.NET\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Understand Classes and Polymorphism in Visual Basic.NET\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Understand Interfaces in Visual Basic.NET\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 3\par
+\pard\sa120\keepn\b\fs34\cf2 OOP\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Visual Basic provides full support for object-oriented programming including encapsulation, inheritance, and polymorphism.\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 4\par
+\pard\sa120\keepn\b\fs34\cf2 Classes and objects\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab The terms class and object are sometimes used interchangeably, but in fact, classes describe the type of objects, while objects are usable instances of classes. So, the act of creating an object is called instantiation. Using the blueprint analogy, a class is a blueprint, and an object is a building made from that blueprint.\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 5\par
+\pard\sa120\keepn\b\fs34\cf2 Classes and objects\b0\par
+\pard\li360\sb60\sa140\f1\fs22\cf5 {\cf2 Public}{\cf5  }{\cf2 Class}{\cf5  }{\cf5 Person}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf5 Name}{\cf5  }{\cf2 As}{\cf5  }{\cf2 String}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf5 Age}{\cf5  }{\cf2 As}{\cf5  }{\cf2 Integer}\line {\cf2 End}{\cf5  }{\cf2 Class}\line {\cf2 Dim}{\cf5  }{\cf5 p}{\cf5  }{\cf2 As}{\cf5  }{\cf2 New}{\cf5  }{\cf5 Person}{\cf5 (}{\cf5 )}\line {\cf5 p}{\cf5 .}{\cf5 Name}{\cf5  }{\cf5 =}{\cf5  }{\cf3 "Alice"}\line {\cf5 p}{\cf5 .}{\cf5 Age}{\cf5  }{\cf5 =}{\cf5  }{\cf6 30}\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 6\par
+\pard\sa120\keepn\b\fs34\cf2 Encapsulation\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Encapsulation is a fundamental concept in object-oriented programming (OOP) that involves bundling the data (attributes) and the methods (functions or procedures) that operate on that data within a single unit, typically a class. It restricts direct access to some of an object's components, which helps to protect the integrity of the data and prevents unintended interference or misuse.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab By using encapsulation, an object's internal state is hidden from the outside world, and access is only possible through well-defined interfaces, such as getter and setter methods. This promotes modularity, maintainability, and security within the software design.\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 7\par
+\pard\sa120\keepn\b\fs34\cf2 Encapsulation\b0\par
+\pard\li360\sb60\sa140\f1\fs22\cf5 {\cf2 Public}{\cf5  }{\cf2 Class}{\cf5  }{\cf5 BankAccount}\line {\cf5     }{\cf2 Private}{\cf5  }{\cf5 balance}{\cf5  }{\cf2 As}{\cf5  }{\cf2 Decimal}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf2 Sub}{\cf5  }{\cf5 Deposit}{\cf5 (}{\cf5 amount}{\cf5  }{\cf2 As}{\cf5  }{\cf2 Decimal}{\cf5 )}\line {\cf5         }{\cf2 If}{\cf5  }{\cf5 amount}{\cf5  }{\cf5 >}{\cf5  }{\cf6 0}{\cf5  }{\cf2 Then}\line {\cf5             }{\cf5 balance}{\cf5  }{\cf5 +}{\cf5 =}{\cf5  }{\cf5 amount}\line {\cf5         }{\cf2 End}{\cf5  }{\cf2 If}\line {\cf5     }{\cf2 End}{\cf5  }{\cf2 Sub}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf2 Function}{\cf5  }{\cf5 GetBalance}{\cf5 (}{\cf5 )}{\cf5  }{\cf2 As}{\cf5  }{\cf2 Decimal}\line {\cf5         }{\cf2 Return}{\cf5  }{\cf5 balance}\line {\cf5     }{\cf2 End}{\cf5  }{\cf2 Function}\line {\cf2 End}{\cf5  }{\cf2 Class}\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 8\par
+\pard\sa120\keepn\b\fs34\cf2 Inheritance\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Inheritance is a core concept in object-oriented programming (OOP) that allows a class (called a subclass or derived class) to inherit properties and behaviors (methods) from another class (called a superclass or base class). This mechanism promotes code reuse and establishes a hierarchical relationship between classes.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Key points about inheritance:\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Reusability: Subclasses can reuse code from the superclass, reducing redundancy.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Extensibility: Subclasses can add new attributes or methods or override existing ones to modify behavior.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Hierarchical Structure: It models real-world relationships, such as a "Car" class inheriting from a "Vehicle" class.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab For example, if you have a superclass "Animal" with methods like "eat()" and "sleep()," a subclass "Dog" can inherit these methods and also have additional behaviors like "bark()."\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 9\par
+\pard\sa120\keepn\b\fs34\cf2 Inheritance\b0\par
+\pard\li360\sb60\sa140\f1\fs22\cf5 {\cf2 Public}{\cf5  }{\cf2 Class}{\cf5  }{\cf5 Animal}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf2 Overridable}{\cf5  }{\cf2 Sub}{\cf5  }{\cf5 Speak}{\cf5 (}{\cf5 )}\line {\cf5         }{\cf5 Console}{\cf5 .}{\cf5 WriteLine}{\cf5 (}{\cf3 "Animal speaks"}{\cf5 )}\line {\cf5     }{\cf2 End}{\cf5  }{\cf2 Sub}\line {\cf2 End}{\cf5  }{\cf2 Class}\line {\cf2 Public}{\cf5  }{\cf2 Class}{\cf5  }{\cf5 Dog}\line {\cf5     }{\cf2 Inherits}{\cf5  }{\cf5 Animal}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf2 Overrides}{\cf5  }{\cf2 Sub}{\cf5  }{\cf5 Speak}{\cf5 (}{\cf5 )}\line {\cf5         }{\cf5 Console}{\cf5 .}{\cf5 WriteLine}{\cf5 (}{\cf3 "Dog barks"}{\cf5 )}\line {\cf5     }{\cf2 End}{\cf5  }{\cf2 Sub}\line {\cf2 End}{\cf5  }{\cf2 Class}\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 10\par
+\pard\sa120\keepn\b\fs34\cf2 Polymorphism\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Polymorphism is a fundamental concept in object-oriented programming that allows objects of different classes to be treated as instances of a common superclass. It enables a single interface to represent different underlying data types or behaviors, facilitating flexibility and extensibility in code. Polymorphism can be achieved through method overriding, where a subclass provides a specific implementation of a method defined in its superclass, or through method overloading, where multiple methods share the same name but differ in parameters. This concept is essential for designing systems that are modular, maintainable, and scalable.\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 11\par
+\pard\sa120\keepn\b\fs34\cf2 Polymorphism\b0\par
+\pard\li360\sb60\sa140\f1\fs22\cf5 {\cf2 Dim}{\cf5  }{\cf5 a}{\cf5  }{\cf2 As}{\cf5  }{\cf5 Animal}{\cf5  }{\cf5 =}{\cf5  }{\cf2 New}{\cf5  }{\cf5 Dog}{\cf5 (}{\cf5 )}\line {\cf5 a}{\cf5 .}{\cf5 Speak}{\cf5 (}{\cf5 )}{\cf5   }{\cf4 ' Outputs: Dog barks}\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 12\par
+\pard\sa120\keepn\b\fs34\cf2 Interfaces\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab interfaces are used to define a contract that classes can implement. An interface specifies a set of methods, properties, events, or indexers that implementing classes must provide, without providing the actual implementation itself. This allows for a form of abstraction and promotes loose coupling in your code.\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 13\par
+\pard\sa120\keepn\b\fs34\cf2 Interfaces\b0\par
+\pard\li360\sb60\sa140\f1\fs22\cf5 {\cf2 Public}{\cf5  }{\cf2 Interface}{\cf5  }{\cf5 IPrintable}\line {\cf5     }{\cf2 Sub}{\cf5  }{\cf5 Print}{\cf5 (}{\cf5 )}\line {\cf2 End}{\cf5  }{\cf2 Interface}\line {\cf2 Public}{\cf5  }{\cf2 Class}{\cf5  }{\cf5 Document}\line {\cf5     }{\cf2 Implements}{\cf5  }{\cf5 IPrintable}\line {\cf5     }{\cf2 Public}{\cf5  }{\cf2 Sub}{\cf5  }{\cf5 Print}{\cf5 (}{\cf5 )}{\cf5  }{\cf2 Implements}{\cf5  }{\cf5 IPrintable}{\cf5 .}{\cf5 Print}\line {\cf5         }{\cf5 Console}{\cf5 .}{\cf5 WriteLine}{\cf5 (}{\cf3 "Printing Document..."}{\cf5 )}\line {\cf5     }{\cf2 End}{\cf5  }{\cf2 Sub}\line {\cf2 End}{\cf5  }{\cf2 Class}\par
+\pard\sb520\sa40\keepn\f0\fs18\cf5 SLIDE 14\par
+\pard\sa120\keepn\b\fs34\cf2 Interfaces (cont.)\b0\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Why Use OOP in VB?\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Makes code more organized, reusable, and maintainable.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Enables modular design.\par
+\pard\tx360\li360\fi-360\sa80\f0\fs26\cf1 \u8226?\tab Helps in building larger applications more efficiently.\par
+\pard\sb400\f0\fs20\cf5 \u8212? End of Lesson 2 \u8212?\par
+}

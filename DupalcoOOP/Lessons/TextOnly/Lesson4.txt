@@ -1,0 +1,208 @@
+﻿LESSON 4
+PLANNING APPLICATIONS AND DESIGNING INTERFACES
+============================================================
+
+IN THIS LESSON
+  • Basic Controls
+  • Control Properties
+  • Control Methods
+  • Control Events
+  • Common Controls
+  • Appearance of Forms
+  • Tab Order
+  • Anchoring and Docking
+
+
+------------------------------------------------------------
+SLIDE 2  –  Learning Outcomes
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• 1. Identify different tools in VB.NET Windows Form
+• 2. Demonstrate the different uses of each basic controls in VB.Net
+• 3. Execute Debugging Applications and Compiling Visual Basic.Net
+• 4. Explain how to control different Forms Properties
+• 5. Define Visual Basic.NET Event Handling
+
+------------------------------------------------------------
+SLIDE 3  –  VB.Net Basic Controls
+------------------------------------------------------------
+
+• An object is a type of user interface element you create on a Visual Basic form by using a toolbox control. In fact, in Visual Basic, the form itself is an object. Every Visual Basic control consists of three important elements:
+• Properties which describe the object,
+• Methods cause an object to do something and
+• Events are what happens when an object does something
+
+------------------------------------------------------------
+SLIDE 4  –  Control Properties
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Control Properties - All the Visual Basic Objects can be moved, resized or customized by setting their properties. A property is a value or characteristic held by a Visual Basic object, such as Caption or Fore Color.
+• Properties can be set at design time by using the Properties window or at run time by using statements in the program code.
+
+------------------------------------------------------------
+SLIDE 5  –  Control Properties (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Value is the new property setting.
+
+------------------------------------------------------------
+SLIDE 6  –  Control Methods
+------------------------------------------------------------
+
+• A method is a procedure created as a member of a class and they cause an object to do something. Methods are used to access or manipulate the characteristics of an object or a variable. There are mainly two categories of methods you will use in your classes:
+• If you are using a control such as one of those provided by the Toolbox, you can call any of its public methods. The requirements of such a method depend on the class being used.
+• If none of the existing methods can perform your desired task, you can add a method to a class.
+
+------------------------------------------------------------
+SLIDE 7  –  MessageBox.Show(“Hello, World”)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• For example, the MessageBox control has a method named Show, which is called in the code snippet below:
+
+------------------------------------------------------------
+SLIDE 8  –  Control Events
+------------------------------------------------------------
+
+• An event is a signal that informs an application that something important has occurred.
+• For example, when a user clicks a control on a form, the form can raise a Click event and call a procedure that handles the event.
+• . There are various types of events associated with a Form like click, double click, close, load, resize, etc.
+
+------------------------------------------------------------
+SLIDE 9  –  Control Events (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Following is the default structure of a form Load event handler subroutine. You can see this code by double clicking the code which will give you a complete list of the all events associated with Form control:
+
+------------------------------------------------------------
+SLIDE 10  –  Control Events (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Here, Handles MyBase.Load indicates that Form1_Load() subroutine handles Load event.
+• If you want to initialize some variables like properties, etc., then you will keep such code inside Form1_Load() subroutine.
+• Here, important point to note is the name of the event handler, which is by default Form1_Load, but you can change this name based on your naming convention you use in your application programming.
+
+------------------------------------------------------------
+SLIDE 11  –  Basic Controls
+------------------------------------------------------------
+
+• VB.Net provides a huge variety of controls that help you to create rich user interface. Functionalities of all these controls are defined in the respective control classes. The control classes are defined in the System.Windows.Forms namespace.
+
+------------------------------------------------------------
+SLIDE 12  –  Basic Controls (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The following table lists some of the commonly used controls:
+
+------------------------------------------------------------
+SLIDE 13  –  Basic Controls (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 14  –  Basic Controls (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 15  –  Appearance of Forms
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 16  –  Properties of the form object
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 17  –  Form Properties
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 18  –  Form Properties
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 19  –  Form Properties (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 20  –  Form Properties (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 21  –  Form Properties (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 22  –  Form Properties (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 23  –  Setting the tab index property
+------------------------------------------------------------
+
+• A tab index can consist of any valid integer greater than or equal to zero, lower numbers being earlier in the tab order. If more than one control on the same parent control has the same tab index, the z-order of the controls determines the order to cycle through the controls.
+• For a control to be included in the tab order, its TabStop property must be set to true.
+
+------------------------------------------------------------
+SLIDE 24  –  Example
+------------------------------------------------------------
+
+• The following code example adds a Button to a form and sets some of its common properties. The example anchors the button to the bottom-right corner of the form so it keeps its relative position as the form is resized. Next it sets the BackgroundImage and resizes the button to the same size as the Image. The example then sets the TabStop to true and sets the TabIndex property. Lastly, it adds an event handler to handle the Click event of the button. This example requires that you have an ImageList named imageList1.
+
+------------------------------------------------------------
+SLIDE 25  –  Example (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 26  –  Anchoring and Docking
+------------------------------------------------------------
+
+• The Anchor and Dock properties of a form are two separate properties. Anchor refers to the position a control has relative to the edges of the form. A textbox, for example, that is anchored to the left edge of a form will stay in the same position as the form is resized. Docking refers to how much space you want the control to take up on the form. If you dock a control to the left of the form, it will stretch itself to the height of the form, but its width will stay the same.
+
+------------------------------------------------------------
+SLIDE 27  –  Anchoring
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Start a new windows projects. Add two textboxes to your form, and set the MultiLine properties of both to True. Change the height of the boxes.
+• Click on Textbox1 and locate the Anchor property in the Properties box:
+
+------------------------------------------------------------
+SLIDE 28  –  Anchoring (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The default is to anchor the control to the Top, Left edge of the form. Click the arrow to reveal a curious drop down box:
+
+------------------------------------------------------------
+SLIDE 29  –  Docking
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Docking is similar to Anchoring, but this time the control fills a certain area of the form. To see how it works, click on one of your textboxes and locate the Dock property. Click the arrow to reveal a drop down box:

@@ -117,37 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="P5Menu1.MenuText" xml:space="preserve">
-    <value>LESSONS
-- 1. Orientations
-- 2. Introduction to OOP
--- Classes and Objects
--- Encapsulation
--- Inheritance
--- Polymorphism
-- 3. Getting Started with Microsoft Visual Basic .NET
-- 4. Planning Applications and Designing Interfaces
-- 5. Data Handling
--- Data Types And Arithmetic Operations
--- Data Handling
-- 6. Coding With Variables Name Constants and Calculations
--- Variable Names
--- Logical Operators
-- 7. Arrays
--- Array Example
--- Month Listbox
-- 8. Working With Controls and Properties
--- Control Sample
--- Text Properties Manipulator
--- Excessive Controls
-- 9. Midterm Examinations
-- 10. Animation
--- 3 Priests and 3 Devils
--- 3 Scientists and 3 Goo
-HELP
-- About
-BSIT2E
-EXIT
-</value>
-  </data>
 </root>

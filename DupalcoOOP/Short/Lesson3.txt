@@ -1,0 +1,40 @@
+LESSON 3: GETTING STARTED WITH MICROSOFT VISUAL BASIC .NET
+
+PROGRAMMING BASICS
+- A computer only follows instructions. A program is a set of instructions that solves a problem or does a task.
+- Programming languages let us use words instead of 1s and 0s. A compiler converts them to machine language.
+
+WHAT A PROGRAM IS MADE OF
+- Keywords: reserved words with special meaning.
+- Operators: symbols that work on data.
+- Variables: named places that store data in memory.
+- Syntax: the rules. One syntax error and the program will not compile.
+- Statements: instructions made of keywords, variables and operators (the code).
+- Procedures: a set of statements that does one task.
+- Comments: ignored when running. In VB they start with an apostrophe (').
+
+TRANSLATORS
+A translator turns a program in one language into an equivalent program in another language without changing its logic.
+
+THE IDE
+An IDE (Integrated Development Environment) has a code editor, build tools and a debugger.
+- Menu Bar: menus at the top of Visual Studio.
+- Standard Toolbar: buttons for common commands.
+- Toolbox: controls you drag onto a form.
+- Solution Explorer: view and manage the project files.
+- Properties Window: change a control's properties at design time.
+- Form Designer: build the interface by dragging controls onto the form.
+- Output / Error List: status messages and errors (Ctrl+Alt+O opens Output).
+- Auto Hide: the pushpin icon saves screen space.
+- Windows can be docked or floating.
+
+CONSOLE APPLICATION
+A command-line program. It reads and writes text in the console and has no Windows GUI.
+
+Example:
+Module Module1
+    Sub Main()
+        Console.WriteLine("Hello, World")
+        Console.ReadLine()
+    End Sub
+End Module

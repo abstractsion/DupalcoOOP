@@ -1,0 +1,66 @@
+LESSON 7: ARRAYS
+
+WHAT IS AN ARRAY
+A group of variables with one name that stores many values of the same type. Each value is an element. You reach an element with its subscript (index), which starts at 0.
+
+DECLARING AN ARRAY
+Dim ArrayName(UpperSubscript) As DataType
+
+Example:
+Dim intHours(6) As Integer      ' 7 elements, index 0 to 6
+intHours(3) = 8
+
+DEFAULT VALUES
+Integer elements start at 0. Decimal starts at 0.0. String starts as Nothing.
+
+INITIALIZING WHEN DECLARED
+Dim intNumbers() As Integer = {2, 4, 6, 8, 10, 12}
+The size is worked out from the values (index 0 to 5).
+
+NAMED CONSTANT AS SIZE
+Const MAX As Integer = 100
+Dim intArray(MAX) As Integer
+
+LOOPING THROUGH AN ARRAY
+Dim total As Integer = 0
+For i = 0 To intNumbers.Length - 1
+    total += intNumbers(i)
+Next
+
+TWO-DIMENSIONAL ARRAYS
+An array with rows and columns.
+
+Example:
+Dim dblScores(2, 3) As Double   ' 3 rows, 4 columns
+dblScores(2, 1) = 95
+
+For r = 0 To 2
+    For c = 0 To 3
+        lstOutput.Items.Add(dblScores(r, c).ToString())
+    Next
+Next
+
+MORE DIMENSIONS
+Arrays can have up to 32 dimensions. More than three are hard to picture, but are useful in some programs.
+
+FUNCTIONS
+A function returns a value.
+
+Example:
+Function Sum(ByVal a As Double, ByVal b As Double) As Double
+    Return a + b
+End Function
+
+dblTotal = Sum(dblValue1, dblValue2)
+
+PASSING AN ARRAY TO A PROCEDURE
+Sub DisplaySum(ByVal intArray() As Integer)
+    Dim total As Integer = 0
+    For i = 0 To intArray.Length - 1
+        total += intArray(i)
+    Next
+    MessageBox.Show("The total is " & total.ToString())
+End Sub
+
+Dim intNumbers() As Integer = {2, 4, 7, 9, 8, 12, 10}
+DisplaySum(intNumbers)

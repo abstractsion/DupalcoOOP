@@ -1,0 +1,666 @@
+﻿LESSON 6
+CODING WITH VARIABLES NAME CONSTANTS AND CALCULATIONS
+============================================================
+
+IN THIS LESSON
+  • Decision Statements
+  • Relational Operators
+  • Nested If
+  • Select Case
+  • Logical Operators
+  • Working with Strings
+  • Loops
+
+
+------------------------------------------------------------
+SLIDE 2  –  Learning Outcomes
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• 1. Identify different conditional statements
+• 2. Demonstrate how to use if, if else, and if elseif else statement
+• 3. Organize different looping statements
+• 4. Describe for next loop, do while loop, while loop and nested control structures.
+• 5. Use Date and Time and Exit and Continue Statements
+
+------------------------------------------------------------
+SLIDE 3  –  Decision Statements
+------------------------------------------------------------
+
+• If statement
+• An If statement implements branching logic based on a testable condition – example:
+• The left pane of this table shows pseudo code – a combination of VB and English to help you organize program logic.
+• The right pane shows a program flowchart – a logic diagram that can also help you organize program logic.
+
+------------------------------------------------------------
+SLIDE 4  –  Decision Statements (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The True branch corresponds to the keyword Then and the False branch corresponds to the keyword Else in the pseudo code.
+• The circle at the end represents the End If statement.
+• You can code an unlimited number of statements inside either the True or False branches.
+
+------------------------------------------------------------
+SLIDE 5  –  The If…Then…ElseIf Statement
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The If…Then…ElseIf statement allows for an entire series of possible choices
+• If it is very cold Then
+• Wear a coat
+• Elseif it is chilly
+• Wear a light jacket
+• Elseif it is windy
+• Wear a windbreaker
+• Elseif it is hot
+• Wear no jacket
+
+------------------------------------------------------------
+SLIDE 6  –  The If…Then…ElseIf Statement (cont.)
+------------------------------------------------------------
+
+• The general format of the Block If statement:
+• If <condition> Then
+• (condition is true - do all of the actions
+• coded in this branch)
+• Else
+• (condition is false - do all of the actions
+• coded in this branch)
+• End If
+
+------------------------------------------------------------
+SLIDE 7  –  The If…Then…Else Statement
+------------------------------------------------------------
+
+• If the expression is True
+• Execute the statements between If…Then and Else
+• If the expression is False
+• Execute the statements between Else and End If
+
+      If expression Then
+          statement
+          (more statements may follow)
+      Else
+          statement
+          (more statements may follow)
+      End If
+
+
+------------------------------------------------------------
+SLIDE 8  –  The If…Then…Else Statement (cont.)
+------------------------------------------------------------
+
+• Learn these rules:
+• A block If statement must always end with an End If statement.
+• The key word Then must appear on the same line as the word If.
+• The key words Else and End If must appear on lines by themselves.
+• The Else branch is optional (see example below).   Only use an Else statement if there is a False branch.
+• Visual Basic automatically indents 4 spaces inside the True and False branches to make the statement easier to read.
+
+------------------------------------------------------------
+SLIDE 9  –  Relational Operators
+------------------------------------------------------------
+
+• Usually a condition is formed using a relational operator
+• A relational operator determines if a specific relationship exists between two values
+
+      >        Greater than
+      <        Less than
+      =        Equal to
+      <>              Not equal to
+      >=              Greater than or equal to
+      <=              Less than or equal to
+
+
+------------------------------------------------------------
+SLIDE 10  –  Boolean Expressions
+------------------------------------------------------------
+
+• Relational operators are binary – meaning they use two operands, for example:
+• length > width    Is length greater than width?
+• size <= 10        Is size less than or equal 10?
+• Relational operators are used in Boolean expressions which yield a True or False result
+• IF GRD >65.4 OR GRD < 69.5 then GRD = 2.75
+
+------------------------------------------------------------
+SLIDE 11  –  Putting It All Together
+------------------------------------------------------------
+
+• If…Then statement examples:
+
+      If decSales > 50000 Then
+          MessageBox.Show("You've earned a bonus!")
+      End If
+
+
+      If decSales > 50000 Then
+          MessageBox.Show("You've earned a bonus!")
+          decCommissionRate = 0.12
+          intDaysOff = intDaysOff + 1
+      End If
+
+
+------------------------------------------------------------
+SLIDE 12  –  Using Relational Operators with Math Operators
+------------------------------------------------------------
+
+• Math operators are evaluated before relational operators
+• intX + intY and intA - intB are evaluated first
+• Most programmers prefer to use parentheses to clarify the order of operations
+
+      If intX + intY > intA - intB Then
+          lblMessage.Text = "It is true!"
+      End If
+
+
+      If (intX + intY) > (intA – intB) Then
+          lblMessage.Text = "It is true!"
+      End If
+
+
+------------------------------------------------------------
+SLIDE 13  –  Using Function Calls with Relational Operators
+------------------------------------------------------------
+
+• Either or both relational operator operands may be function calls
+• The return value of the function call is compared to the value using the relational operator
+
+      If CInt(txtInput.Text) < 100 Then
+          lblMessage.Text = "It is true!"
+      End If
+
+
+------------------------------------------------------------
+SLIDE 14  –  Using Boolean Variables as Flags
+------------------------------------------------------------
+
+• A flag is a Boolean variable that signals when some condition exists in the program
+• Since a Boolean variable is either True or False, it can be used as the condition of an If…Then statement
+• Since a Boolean variable already evaluates to True or False, an = operator is not required
+
+      If blnQuotaMet Then
+          lblMessage.Text = "You have met your sales quota"
+      End If
+
+
+------------------------------------------------------------
+SLIDE 15  –  Nested If Statements
+------------------------------------------------------------
+
+• If Statements Within If Statements
+• Any type of statement may be used inside a set of Then, Else, or ElseIf statements of an If
+
+      This includes other If statements
+
+• If statements within If statements create a more complex decision structure called a    Nested If
+• IF(AH17="","",IF(AH17>=97.5,1,IF(AH17>=94.5,1.25,IF(AH17>=91.5,1.5,IF(AH17>=88.5,1.75,IF(AH17>=85.5,2,IF(AH17>=82.5,2.25,IF(AH17>=97.5,2.5,IF(AH17>=76.5,2.75,IF(AH17>=74.5,3,5))))))))))
+
+------------------------------------------------------------
+SLIDE 16  –  Examining the Nested If Statement
+------------------------------------------------------------
+
+
+      If dblSalary > 30000 Then
+          If intYearsOnJob > 2 Then
+              lblMessage.Text = "Applicant qualifies."
+          Else
+              lblMessage.Text = "Applicant does not qualify."
+          End If
+      Else
+          If intYearsOnJob > 5 Then
+              lblMessage.Text = "Applicant qualifies."
+          Else
+              lblMessage.Text = "Applicant does not qualify."
+          End If
+      End If
+
+
+------------------------------------------------------------
+SLIDE 17  –  Flowchart of Nested If Statements
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 18  –  The Select Case Statement
+------------------------------------------------------------
+
+
+      Similar to If…Then…ElseIf
+      Performs a series of tests
+
+• Conditionally executes the first true condition
+• Select Case is different in that:
+• A single test expression may be evaluated
+• The test expression is listed once
+• The possible values of the expression are then listed with their conditional statements
+
+      Case Else may be included and executed if none of the values match the expression
+
+
+------------------------------------------------------------
+SLIDE 19  –  Select Case General Format
+------------------------------------------------------------
+
+
+      Select Case TestExpression
+          [Case ExpressionList
+          [one or more statements]]
+          [Case ExpressionList
+          [one or more statements]]
+          ' Case statements may be repeated
+          ' as many times as necessary.
+          [Case Else
+          [one or more statements]]
+      End Select
+
+
+------------------------------------------------------------
+SLIDE 20  –  Select Case Statement Example
+------------------------------------------------------------
+
+
+      Select Case CInt(txtInput.Text)
+          Case 1
+              MessageBox.Show("Day 1 is Monday.")
+          Case 2
+              MessageBox.Show("Day 2 is Tuesday.")
+          Case 3
+              MessageBox.Show("Day 3 is Wednesday.")
+          Case 4
+              MessageBox.Show("Day 4 is Thursday.")
+          Case 5
+              MessageBox.Show("Day 5 is Friday.")
+          Case 6
+              MessageBox.Show("Day 6 is Saturday.")
+          Case 7
+              MessageBox.Show("Day 7 is Sunday.")
+          Case Else
+              MessageBox.Show("That value is invalid.")
+      End Select
+
+
+------------------------------------------------------------
+SLIDE 21  –  Visual Basic Logical Operators
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Visual Basic provides Logical operators that can combine multiple Boolean expressions into a compound expression
+
+------------------------------------------------------------
+SLIDE 22  –  The And Operator
+------------------------------------------------------------
+
+• The And operator combines two expressions into one
+• The following If statement uses the And operator:
+
+      If intTemperature < 20 And intMinutes > 12 Then
+          lblMessage.Text = "The temperature is in the danger zone."
+      End If
+
+
+------------------------------------------------------------
+SLIDE 23  –  The And Operator (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Both expressions must be true for the overall expression to be true, as shown in the following truth table:
+
+------------------------------------------------------------
+SLIDE 24  –  Short-Circuit Evaluation with AndAlso
+------------------------------------------------------------
+
+• When using the And operator, if the first expression is false, then the entire expression will be false
+• If there is no need to evaluate the second expression, it can be skipped using a method called short-circuit evaluation
+• In Visual Basic you use the AndAlso operator to achieve short-circuit evaluation
+
+------------------------------------------------------------
+SLIDE 25  –  Short-Circuit Evaluation with AndAlso (cont.)
+------------------------------------------------------------
+
+• In the following example, assuming that dblX is less than or equal to zero, CheckValue is not called and "Expression is False" is displayed:
+
+      If dblX > 0 AndAlso CheckValue(dblX) Then
+          lblResult.Text = "Expression is True"
+      Else
+          lblResult.Text = "Expression is False"
+      End If
+
+
+------------------------------------------------------------
+SLIDE 26  –  The Or Operator
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Or operator combines two expressions into one
+• The following If statement uses the Or operator:
+• One or both expressions must be true for the overall expression to be true, as shown in the following truth table:
+
+------------------------------------------------------------
+SLIDE 27  –  Short Circuit-Evaluation with OrElse
+------------------------------------------------------------
+
+• When using the Or operator, if the first expression is true, then the entire expression will be true
+• If there is no need to evaluate the second expression, it can be skipped using short-circuit evaluation with the OrElse operator
+
+------------------------------------------------------------
+SLIDE 28  –  Short Circuit-Evaluation with OrElse (cont.)
+------------------------------------------------------------
+
+• In the following example, if dblX is equal to zero, CheckValue is not called and "Expression is True" is displayed:
+
+      If dblX = 0 OrElse CheckValue(dblX) Then
+          lblResult.Text = "Expression is True"
+      End If
+
+
+      If CheckBox1.Checked = True Then
+
+
+------------------------------------------------------------
+SLIDE 29  –  The Xor Operator
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Xor operator combines two expressions into one
+• The following If statement uses the Xor operator:
+• One but not both expressions must be true for the overall expression to be true, as shown in the following truth table:
+
+------------------------------------------------------------
+SLIDE 30  –  The Not Operator
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Not operator takes a Boolean expression and reverses its logical value
+• The following If statement uses the Not operator:
+• If the expression is true, the Not operator returns False, and if the expression is false, it returns True, as shown in the following truth table:
+
+------------------------------------------------------------
+SLIDE 31  –  Precedence of Logical Operators
+------------------------------------------------------------
+
+• Logical operators have an order of precedence just as arithmetic operators do
+
+      From highest to lowest precedence
+      Not
+      And
+      Or
+      Xor
+
+• As with arithmetic operations, parentheses are often used to clarify order of operations
+
+------------------------------------------------------------
+SLIDE 32  –  Precedence of Logical Operators
+------------------------------------------------------------
+
+• For example, in the statement
+
+      If x < 0 And y > 100 Or z = 50
+
+• x < 0 And y > 100 is evaluated first
+• If the And condition is true, we then evaluate
+
+      True Or z = 50
+
+• If the And condition is false, we then evaluate
+
+      False Or z = 50
+
+• If the Or condition is to be evaluated first, parentheses must be used
+
+      If x < 0 And (y > 100 Or z = 50)
+
+
+------------------------------------------------------------
+SLIDE 33  –  Math, Relational, &  Logical Operators
+------------------------------------------------------------
+
+• Evaluate the following if: a=5, b=7, x=100, y=30
+
+      If x > a * 10 And y < b + 20
+
+• Evaluating the math operators leaves us with
+
+      If x > 50 And y < 27
+      Evaluating the relational operators leaves
+
+• If True And False
+
+      Evaluating the logical operators leaves
+      False
+
+• Parentheses make order of operations clear
+
+      If (x > (a * 10)) And (y < (b + 20))
+
+
+------------------------------------------------------------
+SLIDE 34  –  Comparing, Testing, and Working with Strings
+------------------------------------------------------------
+
+• Relational operators can be used to compare strings and string literals
+
+      strName1 = "Mary"
+      strName2 = "Mark"
+      If strName1 = strName2 Then
+          lblMessage.Text = " Names are the same"
+      Else
+          lblMessage.Text = " Names are NOT the same"
+      End If
+
+
+      If strMonth <> "October" Then
+          ' statement
+      End If
+
+
+------------------------------------------------------------
+SLIDE 35  –  How Are Strings Compared?
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Characters are stored as numeric values
+• Visual Basic uses Unicode
+• The Unicode numbering system represents:
+  – All letters of the alphabet
+  – Printable digits 0 through 9
+  – Punctuation symbols and special characters
+• Letters (A,B,C) are arranged alphabetically
+  – The numeric value of A is less than the numeric value of B
+• Characters of each string are compared one by one until a difference is found
+
+------------------------------------------------------------
+SLIDE 36  –  Testing for No Input
+------------------------------------------------------------
+
+• The predefined constant String.Empty represents an empty string, which is a string that contains no characters
+• Useful for determining whether the user has provided input for a required field before performing operations on that field
+
+      If txtInput.Text = String.Empty Then
+          lblMessage.Text = "Please enter a value"
+      Else
+          ' The txtInput control contains input, so
+          ' perform an operation with it here.
+      End If
+
+• empty(txtInput.text) = null
+• txtInout.text =””        = null
+• txtInout.text =”  ”         !null
+
+------------------------------------------------------------
+SLIDE 37  –  The ToUpper and ToLower Methods
+------------------------------------------------------------
+
+• The ToUpper method can be applied to a string
+• Results in a string with lowercase letters converted to uppercase
+• The original string is not changed
+• General Format:
+• In the following example, strBigWord is assigned the string "HELLO" using the ToUpper method:
+• The ToLower method can be applied to a string
+• Results in a string with uppercase letters converted to lowercase
+• The original string is not changed
+• General Format:
+• In the following example, strLittleTown is assigned the string "new york" using the ToLower method:
+
+      StringExpression.ToUpper()
+
+
+      strLittleWord = "Hello"
+      strBigWord = strLittleWord.ToUpper()
+
+
+      StringExpression.ToLower()
+
+
+      strBigTown = "NEW YORK"
+      strLittleTown = strBigTown.ToLower()
+
+
+------------------------------------------------------------
+SLIDE 38  –  The IsNumeric Function
+------------------------------------------------------------
+
+• This function accepts a string as an argument and returns True if the string contains a number
+• Use IsNumeric function to determine if a given string contains numeric data
+
+      Dim strNumber As String
+      strNumber = "576"
+      If IsNumeric(strNumber) ' Returns true
+      strNumber = "123abc"
+      If IsNumeric(strNumber) ' Returns false
+
+
+------------------------------------------------------------
+SLIDE 39  –  Determining the Length of a String
+------------------------------------------------------------
+
+• The Length property, a member of the String class, returns the number of characters in a string
+• In the following example, the intNumChars variable contains the value 6:
+• You can also determine the length of a control's Text property, as shown in the following code:
+
+      Dim strName As String = "Herman"
+      Dim intNumChars As Integer
+      intNumChars = strName.Length
+
+
+      If txtInput.Text.Length > 20 Then
+          lblMessage.Text = "Please enter no more than 20 characters."
+      End If
+
+
+------------------------------------------------------------
+SLIDE 40  –  Trimming Spaces from Strings
+------------------------------------------------------------
+
+• There are three methods that remove spaces from strings:
+
+      TrimStart  - removes leading spaces
+      TrimEnd      - removes trailing spaces
+
+• Trim             - removes leading and trailing spaces
+• Here is the general format for each method:
+• An example with three leading and trailing spaces, using each method:
+
+      StringExpression.TrimStart()
+      StringExpression.TrimEnd()
+      StringExpression.Trim()
+
+
+      strGreeting = "    Hello    "
+      lblMessage1.Text = strGreeting.TrimStart() ' "Hello    "
+      lblMessage2.Text = strGreeting.TrimEnd()   ' "    Hello"
+      lblMessage3.Text = strGreeting.Trim()      ' "Hello"
+
+
+------------------------------------------------------------
+SLIDE 41  –  Looping Statement
+------------------------------------------------------------
+
+• A repetition structure, or loop causes one or more statements to repeat
+• Each repetition of the loop is called an iteration
+• Visual Basic has three types of loops:
+
+      Do While    variable = value
+          Do Until
+              For… Next
+
+• The difference among them is how they control the repetition
+
+------------------------------------------------------------
+SLIDE 42  –  Looping Statement (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Do While loop has two important parts:
+• a Boolean expression that is tested for a True or False value
+• a statement or group of statements that is repeated as long as the Boolean expression is true, called Conditionally executed statements
+
+------------------------------------------------------------
+SLIDE 43  –  Looping Statement (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Expression intCount < 10 is tested
+• If True, execute body:
+• "Hello" added to lstOutput Items Collection
+• Repeat until intCount < 10 becomes False
+
+------------------------------------------------------------
+SLIDE 44  –  Looping Statement (cont.)
+------------------------------------------------------------
+
+
+      Example of For…Next Loop
+
+• Step 1:      intCount is set to 1 (the start value)
+• Step 2:      intCount is compared to 10 (the end value)
+• If intCount is less than or equal to 10
+
+      Continue to Step 3
+      Otherwise the loop is exited
+      Step 3:     The MessageBox.Show("Hello") statement is executed
+
+• Step 4:     intCount is incremented by 1
+• Step 5:     Go back to Step 2 and repeat this sequence
+
+      For intCount = 0 To 9
+          MessageBox.Show("Hello")
+      Next
+
+
+------------------------------------------------------------
+SLIDE 45  –  Nested Loop
+------------------------------------------------------------
+
+• A nested loop is a loop inside another loop
+• The hands of a clock make a good example
+  – The hour hand makes 1 revolution for every 60 revolutions of the minute hand
+  – The minute hand makes 1 revolution for every 60 revolutions of the second hand
+  – For every revolution of the hour hand the second hand makes 36,000 revolutions
+
+------------------------------------------------------------
+SLIDE 46  –  Nested Loop (cont.)
+------------------------------------------------------------
+
+• Nested Loop Example
+
+      For intHours = 0 To 23
+          lblHours.Text = intHours.ToString()
+          For intMinutes = 0 To 59
+              lblMinutes.Text = intMinutes.ToString()
+              For intSeconds = 0 To 59
+                  lblSeconds.Text = intSeconds.ToString()
+              Next
+          Next
+      Next
+
+• Hours (outer loop)
+• Minutes (middle loop)
+• Seconds (inner loop)
+
+------------------------------------------------------------
+SLIDE 47  –  Nested Loop (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]

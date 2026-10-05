@@ -1,0 +1,39 @@
+INHERITANCE
+
+WHAT IT IS
+Inheritance lets a class (the subclass) reuse the fields and methods of another class (the base class). The subclass can also add new behavior or override existing behavior.
+
+REAL-LIFE EXAMPLE
+A Dog is an Animal. It eats and speaks like any animal, and it can also do things only dogs do, like fetch.
+
+KEY POINTS
+- Reusability: write shared code once in the base class.
+- Extensibility: subclasses can add their own methods.
+- Overriding: a subclass can change how an inherited method works.
+- VB keywords: Inherits, Overridable, Overrides.
+
+EXAMPLE CODE
+Public Class Animal
+    Public Function Eat() As String
+        Return "eating..."
+    End Function
+
+    Public Overridable Function Speak() As String
+        Return "Animal speaks"
+    End Function
+End Class
+
+Public Class Dog
+    Inherits Animal
+
+    Public Overrides Function Speak() As String
+        Return "Dog barks"
+    End Function
+
+    Public Function Fetch() As String
+        Return "fetching the ball"
+    End Function
+End Class
+
+WHAT THE DEMO DOES
+Pick Animal, Dog or Cat and click EXECUTE. You will see that every one can Eat() because they inherit it, each Speak() is different, and only Dog has Fetch().

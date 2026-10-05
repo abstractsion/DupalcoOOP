@@ -1,0 +1,50 @@
+LESSON 8: WORKING WITH CONTROLS AND PROPERTIES
+
+DIALOG BOXES
+Windows has built-in dialog boxes for common jobs: choosing colors and fonts, opening and saving files, printing. You drag one onto the form and it appears in the component tray under the form.
+
+SHOWDIALOG AND DIALOGRESULT
+ShowDialog() displays the dialog and returns a DialogResult: OK, Cancel, Yes, No, Abort, Retry or Ignore. Check it before using the choice.
+
+COLORDIALOG
+Lets the user pick a color. The main property is Color.
+
+Example:
+If ColorDialog1.ShowDialog() = DialogResult.OK Then
+    Me.BackColor = ColorDialog1.Color
+End If
+
+FONTDIALOG
+Lets the user pick a font, size and style. Set ShowColor to True to also show a color choice. Main properties: Font and Color.
+
+Example:
+If FontDialog1.ShowDialog() = DialogResult.OK Then
+    TextBox1.Font = FontDialog1.Font
+End If
+
+OPENFILEDIALOG
+Lets the user choose a file to open.
+Useful properties: Filter, FileName, InitialDirectory, Multiselect, Title.
+
+Example:
+OpenFileDialog1.Filter = "Text files|*.txt"
+If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+    TextBox1.Text = IO.File.ReadAllText(OpenFileDialog1.FileName)
+End If
+
+SAVEFILEDIALOG
+Lets the user choose where to save and the file name.
+Useful properties: Filter, FileName, OverwritePrompt, Title.
+
+Example:
+SaveFileDialog1.Filter = "Text files|*.txt"
+If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+    IO.File.WriteAllText(SaveFileDialog1.FileName, TextBox1.Text)
+End If
+
+PRINTDIALOG
+Lets the user choose a printer and which pages to print.
+
+METHODS YOU WILL SEE
+- ShowDialog: displays the dialog.
+- Reset: sets the options back to their defaults.

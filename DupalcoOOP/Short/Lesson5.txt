@@ -1,0 +1,66 @@
+LESSON 5: DATA HANDLING
+
+VARIABLES
+A variable stores a value in memory under a unique name. The value can change.
+
+DATA TYPES
+- String: text
+- Integer / Short / Long: whole numbers
+- Decimal: money and exact decimals
+- Single / Double: numbers with decimals
+- Boolean: True or False
+Business apps mostly use String, Decimal, Single and Integer.
+
+NAMING RULES
+- Letters, digits and underscore only. Must start with a letter.
+- No spaces or periods.
+- Cannot be a reserved word (like Dim or Const).
+- Not case sensitive.
+
+DECLARING VARIABLES
+Use Dim for local variables (inside a procedure). Use Private for module-level variables.
+
+Example:
+Dim StudentName As String
+Dim Count As Integer
+Dim Balance As Decimal = 100D
+
+DECLARING CONSTANTS
+A constant cannot change while the program runs. It must have a starting value.
+
+Example:
+Const SALES_TAX_RATE As Single = 0.0725F
+Const TITLE As String = "Data Entry Error"
+
+SCOPE
+- Namespace: usable anywhere in the project.
+- Module-level: usable in any procedure on one form.
+- Local: usable only inside one procedure.
+- Block: usable only inside a small block.
+
+CONVERTING DATA TYPES
+- Implicit: VB does it automatically from a smaller type to a bigger one.
+- Explicit: you convert it, using Convert or Parse.
+- ToString turns a number into text for a TextBox.
+
+Example:
+SubtotalTextBox.Text = Subtotal.ToString("N2")
+Dim qty As Integer = Integer.Parse(txtQty.Text)
+
+ARITHMETIC OPERATORS
++  Add      -  Subtract      *  Multiply      /  Divide
+^  Power    \  Integer divide      Mod  Remainder
+
+Example:
+Hours = Minutes \ 60        ' 130 minutes gives 2
+Left = Minutes Mod 60       ' 130 minutes gives 10
+
+ORDER OF OPERATIONS
+Parentheses, then exponents, then multiply and divide, then integer divide, then Mod, then add and subtract.
+
+ASSIGNMENT OPERATORS
+= stores a value. += adds to the variable. -= subtracts from it.
+
+Example:
+Total += SaleAmount     ' same as Total = Total + SaleAmount
+Count -= 1

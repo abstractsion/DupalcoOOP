@@ -1,0 +1,413 @@
+﻿LESSON 8
+WORKING WITH CONTROLS AND PROPERTIES
+============================================================
+
+IN THIS LESSON
+  • Dialog Boxes
+  • ColorDialog
+  • FontDialog
+  • OpenFileDialog
+  • SaveFileDialog
+
+
+------------------------------------------------------------
+SLIDE 2  –  LEARNING OUTCOMES:
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• 1. Enumerate the different controls in VB.Net
+• 2. Explain how to use different Dialog Controls
+• 3. Demonstrate Manipulation, Formatting, Methods, Advanced Editing, Cutting, Copying and Pasting Features in VB.Net
+• 4. Describe the uses of Tree View and List View Controls
+
+------------------------------------------------------------
+SLIDE 3  –  VB.Net - Dialog Boxes
+------------------------------------------------------------
+
+• There are many built-in dialog boxes to be used in Windows forms for various tasks like opening and saving files, printing a page, providing choices for colors, fonts, page setup, etc., to the user of an application. These built-in dialog boxes reduce the developer's time and workload.
+• All of these dialog box control classes inherit from the CommonDialog class and override the RunDialog() function of the base class to create the specific dialog box.
+
+------------------------------------------------------------
+SLIDE 4  –  VB.Net - Dialog Boxes (cont.)
+------------------------------------------------------------
+
+• The RunDialog() function is automatically invoked when a user of a dialog box calls its ShowDialog()function.
+• The ShowDialog method is used to display all the dialog box controls at run-time. It returns a value of the type of DialogResult enumeration. The values of DialogResult enumeration are:
+• Abort - returns DialogResult.Abort value, when user clicks an Abort button.
+• Cancel- returns DialogResult.Cancel, when user clicks a Cancel button.
+• Ignore - returns DialogResult.Ignore, when user clicks an Ignore button.
+
+------------------------------------------------------------
+SLIDE 5  –  VB.Net - Dialog Boxes (cont.)
+------------------------------------------------------------
+
+• No - returns DialogResult.No, when user clicks a No button.
+• None - returns nothing and the dialog box continues running.
+• OK - returns DialogResult.OK, when user clicks an OK button
+• Retry - returns DialogResult.Retry , when user clicks an Retry button
+• Yes - returns DialogResult.Yes, when user clicks an Yes button
+
+------------------------------------------------------------
+SLIDE 6  –  The following diagram shows the common dialog class inheritance:
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 7  –  The following diagram shows the common dialog class inheritance: (cont.)
+------------------------------------------------------------
+
+• All these above-mentioned classes have corresponding controls that could be added from the Toolbox during design time. You can include relevant functionality of these classes to your application, either by instantiating the class programmatically or by using relevant controls.
+• When you double click any of the dialog controls in the toolbox or drag the control onto the form, it appears in the Component tray at the bottom of the Windows Forms Designer, they do not directly show up on the form.
+
+------------------------------------------------------------
+SLIDE 8  –  The following diagram shows the common dialog class inheritance: (cont.)
+------------------------------------------------------------
+
+• The following table lists the commonly used dialog box controls. Click the following links to check their detail:
+• S.N. Control & Description
+• 1. ColorDialog
+• It represents a common dialog box that displays available colors along with controls that enable the user to define custom colors.
+
+------------------------------------------------------------
+SLIDE 9  –  The following diagram shows the common dialog class inheritance: (cont.)
+------------------------------------------------------------
+
+• 2.  FontDialog
+• It prompts the user to choose a font from among those installed on the local computer and lets the user select the font, font size, and color.
+• 3.  OpenFileDialog
+• It prompts the user to open a file and allows the user to select a file to open.
+• 4.  SaveFileDialog
+• It prompts the user to select a location for saving a file and allows the user to specify the name of the file to save data.
+• 5.  PrintDialog
+• It lets the user to print documents by selecting a printer and choosing which sections of the document to print from a Windows Forms application.
+
+------------------------------------------------------------
+SLIDE 10  –  VB.Net - ColorDialog Control
+------------------------------------------------------------
+
+• The ColorDialog control class represents a common dialog box that displays available colors along with controls that enable the user to define custom colors. It lets the user select a color.
+• The main property of the ColorDialog control is Color, which returns a Color object.
+
+------------------------------------------------------------
+SLIDE 11  –  Following is the Color dialog box:
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 12  –  Properties of the ColorDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used properties of the ColorDialog control:
+• S.N Property Description
+• 1. AllowFullOpen
+• Gets or sets a value indicating whether the user can use the dialog box to define custom colors.
+• 2. AnyColor
+• Gets or sets a value indicating whether the dialog box displays all available colors in the set of basic colors.
+
+------------------------------------------------------------
+SLIDE 13  –  Properties of the ColorDialog Control (cont.)
+------------------------------------------------------------
+
+• 3. CanRaiseEvents
+• Gets a value indicating whether the component can raise an event.
+• 4. Color
+• Gets or sets the color selected by the user.
+• 5. CustomColors
+• Gets or sets the set of custom colors shown in the dialog box.
+• 6. FullOpen
+• Gets or sets a value indicating whether the controls used to create custom colors are visible when the dialog box is opened
+
+------------------------------------------------------------
+SLIDE 14  –  Properties of the ColorDialog Control (cont.)
+------------------------------------------------------------
+
+• 7. ShowHelp
+• Gets or sets a value indicating whether a Help button appears in the color dialog box.
+• 8. SolidColorOnly
+• Gets or sets a value indicating whether the dialog box will restrict users to selecting solid colors only.
+
+------------------------------------------------------------
+SLIDE 15  –  Methods of the ColorDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used methods of the ColorDialog control:
+• S.N Method Name & Description
+• 1. Reset
+• Resets all options to their default values, the last selected color to black, and the custom colors to their default values.
+• 2. RunDialog
+• When overridden in a derived class, specifies a common dialog box.
+• 3. ShowDialog
+• Runs a common dialog box with a default owner.
+
+------------------------------------------------------------
+SLIDE 16  –  Events of the ColorDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used events of the ColorDialog control:
+• S.N Event
+• Description
+• 1. HelpRequest
+• Occurs when the user clicks the Help button on a common dialog box.
+
+------------------------------------------------------------
+SLIDE 17  –  VB.Net - FontDialog Control
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• It prompts the user to choose a font from among those installed on the local computer and lets the user select the font, font size, and color. It returns the Font and Color objects.
+• Following is the Font dialog box:
+• By default, the                    Color ComboBox is not shown on the Font dialog box. You should set the ShowColorproperty of the FontDialog control to be True.
+
+------------------------------------------------------------
+SLIDE 18  –  Properties of the FontDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used properties of the FontDialog control:
+• S.N Property Description
+• 1. AllowSimulations
+• Gets or sets a value indicating whether the dialog box allows graphics device interface (GDI) font simulations.
+• 2. AllowVectorFonts
+• Gets or sets a value indicating whether the dialog box allows vector font selections.
+• 3. AllowVerticalFonts
+• Gets or sets a value indicating whether the dialog box displays both vertical and horizontal fonts, or only horizontal fonts.
+
+------------------------------------------------------------
+SLIDE 19  –  Properties of the FontDialog Control (cont.)
+------------------------------------------------------------
+
+• 4 Color
+• Gets or sets the selected font color.
+• 5 FixedPitchOnly
+• Gets or sets a value indicating whether the dialog box allows only the selection of fixed-pitch fonts.
+• 6 Font
+• Gets or sets the selected font.
+• 7 FontMustExist
+• Gets or sets a value indicating whether the dialog box specifies an error condition if the user attempts to select a font or style that does not exist.
+
+------------------------------------------------------------
+SLIDE 20  –  Properties of the FontDialog Control (cont.)
+------------------------------------------------------------
+
+• 8. MaxSize
+• Gets or sets the maximum point size a user can select.
+• 9. MinSize
+• Gets or sets the minimum point size a user can select.
+• 10. ScriptsOnly
+• Gets or sets a value indicating whether the dialog box allows selection of fonts for all non-OEM and Symbol character sets, as well as the ANSI character set.
+• 11. ShowApply
+• Gets or sets a value indicating whether the dialog box contains an Apply button.
+
+------------------------------------------------------------
+SLIDE 21  –  Properties of the FontDialog Control (cont.)
+------------------------------------------------------------
+
+• 12. ShowColor
+• Gets or sets a value indicating whether the dialog box displays the color choice.
+• 13. ShowEffects
+• Gets or sets a value indicating whether the dialog box contains controls that allow the user to specify strikethrough, underline, and text color options.
+• 14. ShowHelp
+• Gets or sets a value indicating whether the dialog box displays a Help button.
+
+------------------------------------------------------------
+SLIDE 22  –  Methods of the FontDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used methods of the FontDialog control:
+• S.N Method Name & Description
+• 1. Reset
+• Resets all options to their default values.
+• 2. RunDialog
+• When overridden in a derived class, specifies a common dialog box.
+• 3. ShowDialog
+• Runs a common dialog box with a default owner.
+
+------------------------------------------------------------
+SLIDE 23  –  Events of the FontDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used events of the FontDialog control:
+• S.N Event Description
+• 1. Apply
+• Occurs when the Apply button on the font dialog box is clicked.
+
+------------------------------------------------------------
+SLIDE 24  –  VB.Net - OpenFileDialog Control
+------------------------------------------------------------
+
+• The OpenFileDialog control prompts the user to open a file and allows the user to select a file to open. The user can check if the file exists and then open it. The OpenFileDialog control class inherits from the abstract class FileDialog.
+• If the ShowReadOnly property is set to True, then a read-only check box appears in the dialog box. You can also set the ReadOnlyChecked property to True, so that the read-only check box appears checked.
+
+------------------------------------------------------------
+SLIDE 25  –  Following is the Open File dialog box:
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 26  –  Properties of the OpenFileDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used properties of the OpenFileDialog control:
+• S.N Property Description
+• 1. AddExtension
+• Gets or sets a value indicating whether the dialog box automatically adds an extension to a file name if the user omits the extension.
+• 2. AutoUpgradeEnabled
+• Gets or sets a value indicating whether this FileDialog instance should automatically upgrade appearance and behavior when running on Windows Vista.
+
+------------------------------------------------------------
+SLIDE 27  –  Properties of the OpenFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 3. CheckFileExists
+• Gets or sets a value indicating whether the dialog box displays a warning if the user specifies a file name that does not exist.
+• 4. CheckPathExists
+• Gets or sets a value indicating whether the dialog box displays a warning if the user specifies a path that does not exist.
+• 5. CustomPlaces
+• Gets the custom places collection for this FileDialog instance.
+• 6. DefaultExt
+• Gets or sets the default file name extension.
+
+------------------------------------------------------------
+SLIDE 28  –  Properties of the OpenFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 7. DereferenceLinks
+• Gets or sets a value indicating whether the dialog box returns the location of the file referenced by the shortcut or whether it returns the location of the shortcut (.lnk).
+• 8. FileName
+• Gets or sets a string containing the file name selected in the file dialog box.
+• 9. FileNames
+• Gets the file names of all selected files in the dialog box.
+• 10. Filter
+• Gets or sets the current file name filter string, which determines the choices that appear in the "Save as file type" or "Files of type" box in the dialog box.
+
+------------------------------------------------------------
+SLIDE 29  –  Properties of the OpenFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 11. FilterIndex
+• Gets or sets the index of the filter currently selected in the file dialog box.
+• 12. InitialDirectory
+• Gets or sets the initial directory displayed by the file dialog box.
+• 13. Multiselect
+• Gets or sets a value indicating whether the dialog box allows multiple files to be selected.
+• 14. ReadOnlyChecked
+• Gets or sets a value indicating whether the read-only check box is selected.
+
+------------------------------------------------------------
+SLIDE 30  –  Properties of the OpenFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 15. RestoreDirectory
+• Gets or sets a value indicating whether the dialog box restores the current directory before closing.
+• 16. SafeFileName
+• Gets the file name and extension for the file selected in the dialog box. The file name does not include the path.
+• 17. SafeFileNames
+• Gets an array of file names and extensions for all the selected files in the dialog box. The file names do not include the path.
+• 18. ShowHelp
+• Gets or sets a value indicating whether the Help button is displayed in the file dialog box.
+
+------------------------------------------------------------
+SLIDE 31  –  Properties of the OpenFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 19. ShowReadOnly
+• Gets or sets a value indicating whether the dialog box contains a read-only check box.
+• 20. SupportMultiDottedExtensions
+• Gets or sets whether the dialog box supports displaying and saving files that have multiple file name extensions.
+• 21. Title
+• Gets or sets the file dialog box title.
+• 22. ValidateNames
+• Gets or sets a value indicating whether the dialog box accepts only valid Win32 file names.
+
+------------------------------------------------------------
+SLIDE 32  –  Methods of the OpenFileDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used methods of the OpenFileDialog control:
+• S.N Method Name & Description
+• 1. OpenFile
+• Opens the file selected by the user, with read-only permission. The file is specified by the FileName property.
+• 2. Reset
+• Resets all options to their default value.
+
+------------------------------------------------------------
+SLIDE 33  –  VB.Net - SaveFileDialog Control
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The SaveFileDialog control prompts the user to select a location for saving a file and allows the user to specify the name of the file to save data. The SaveFileDialog control class inherits from the abstract class FileDialog.
+• Following is the Save File dialog box
+
+------------------------------------------------------------
+SLIDE 34  –  Properties of the SaveFileDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used properties of the SaveFileDialog control:
+• S.N  Property Description
+• 1. AddExtension
+• Gets or sets a value indicating whether the dialog box automatically adds an extension to a file name if the user omits the extension.
+• 2. CheckFileExists
+• Gets or sets a value indicating whether the dialog box displays a warning if the user specifies a file name that does not exist.
+• 3. CheckPathExists
+• Gets or sets a value indicating whether the dialog box displays a warning if the user specifies a path that does not exist.
+
+------------------------------------------------------------
+SLIDE 35  –  Properties of the SaveFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 4. CreatePrompt
+• Gets or sets a value indicating whether the dialog box prompts the user for permission to create a file if the user specifies a file that does not exist.
+• 5. DefaultExt
+• Gets or sets the default file name extension.
+• 6. DereferenceLinks
+• Gets or sets a value indicating whether the dialog box returns the location of the file referenced by the shortcut or whether it returns the location of the shortcut (.lnk).
+• 7. FileName
+• Gets or sets a string containing the file name selected in the file dialog box.
+
+------------------------------------------------------------
+SLIDE 36  –  Properties of the SaveFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 8. FileNames
+• Gets the file names of all selected files in the dialog box.
+• 9. Filter
+• Gets or sets the current file name filter string, which determines the choices that appear in the "Save as file type" or "Files of type" box in the dialog box.
+• 10. FilterIndex
+• Gets or sets the index of the filter currently selected in the file dialog box.
+• 11. InitialDirectory
+• Gets or sets the initial directory displayed by the file dialog box.
+
+------------------------------------------------------------
+SLIDE 37  –  Properties of the SaveFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 12. OverwritePrompt
+• Gets or sets a value indicating whether the Save As dialog box displays a warning if the user specifies a file name that already exists.
+• 13. RestoreDirectory
+• Gets or sets a value indicating whether the dialog box restores the current directory before closing.
+• 14. ShowHelp
+• Gets or sets a value indicating whether the Help button is displayed in the file dialog box.
+
+------------------------------------------------------------
+SLIDE 38  –  Properties of the SaveFileDialog Control (cont.)
+------------------------------------------------------------
+
+• 15. SupportMultiDottedExtensions
+• Gets or sets whether the dialog box supports displaying and saving files that have multiple file name extensions.
+• 16. Title
+• Gets or sets the file dialog box title.
+• 17. ValidateNames
+• Gets or sets a value indicating whether the dialog box accepts only valid Win32 file names.
+
+------------------------------------------------------------
+SLIDE 39  –  Methods of the SaveFileDialog Control
+------------------------------------------------------------
+
+• The following are some of the commonly used methods of the SaveFileDialog control:
+• S.N Method Name & Description
+• 1. OpenFile
+• Opens the file with read/write permission.
+• 2. Reset
+• Resets all dialog box options to their default values.

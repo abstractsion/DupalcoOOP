@@ -1,0 +1,31 @@
+POLYMORPHISM
+
+WHAT IT IS
+Polymorphism means "many forms". Objects of different classes can be treated as their common base class, and the same method call behaves differently for each one.
+
+REAL-LIFE EXAMPLE
+Pressing "play" on a phone, a TV remote or a music app. Same button, and each device does its own thing.
+
+KEY POINTS
+- Overriding: a subclass gives its own version of a base class method.
+- Overloading: the same method name with different parameters.
+- Code can work with the base type and not care which subclass it really is.
+
+EXAMPLE CODE
+' Overriding
+Dim a As Animal = New Dog()
+a.Speak()                     ' Dog barks
+
+' Overloading
+Public Class MathHelper
+    Public Function Add(a As Integer, b As Integer) As Integer
+        Return a + b
+    End Function
+
+    Public Function Add(a As Double, b As Double) As Double
+        Return a + b
+    End Function
+End Class
+
+WHAT THE DEMO DOES
+Pick an animal and click EXECUTE. It calls Speak() through an Animal variable, then calls Speak() on every animal to show the different results, then calls the two Add methods.

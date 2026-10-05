@@ -1,0 +1,86 @@
+LESSON 6: SELECTION AND REPETITION
+
+IF STATEMENT
+An If makes a decision. Then is the True branch, Else is the False branch. It must end with End If.
+
+Example:
+If sales > 50000 Then
+    MessageBox.Show("You earned a bonus!")
+Else
+    MessageBox.Show("Keep going")
+End If
+
+ELSEIF
+Use ElseIf for a series of choices.
+
+Example:
+If temp < 10 Then
+    lblMessage.Text = "Wear a coat"
+ElseIf temp < 20 Then
+    lblMessage.Text = "Wear a light jacket"
+Else
+    lblMessage.Text = "No jacket"
+End If
+
+RELATIONAL OPERATORS
+>  Greater than     <  Less than     =  Equal to
+<> Not equal to     >= Greater or equal     <= Less or equal
+
+NESTED IF
+An If inside another If.
+
+Example:
+If salary > 30000 Then
+    If years > 2 Then
+        lblMessage.Text = "Applicant qualifies"
+    End If
+End If
+
+SELECT CASE
+Tests one value against many possibilities. Case Else runs if nothing matches.
+
+Example:
+Select Case day
+    Case 1
+        MessageBox.Show("Monday")
+    Case 2
+        MessageBox.Show("Tuesday")
+    Case Else
+        MessageBox.Show("Invalid")
+End Select
+
+LOGICAL OPERATORS
+- And: both must be True.
+- Or: at least one must be True.
+- Xor: one but not both.
+- Not: reverses True and False.
+- AndAlso and OrElse stop early when the answer is already known (short-circuit).
+Order: Not, And, Or, Xor. Use parentheses to be clear.
+
+WORKING WITH STRINGS
+- Compare strings with = and <>.
+- Check for empty input: If txtInput.Text = String.Empty Then ...
+- ToUpper() and ToLower() change the case.
+- Length gives the number of characters.
+- Trim removes spaces at both ends.
+- IsNumeric(text) checks if the text is a number.
+
+LOOPS
+A loop repeats statements. Each repeat is an iteration.
+
+Do While repeats while the condition is True.
+Dim count As Integer = 0
+Do While count < 10
+    lstOutput.Items.Add("Hello")
+    count += 1
+Loop
+
+For...Next repeats a set number of times.
+For i = 1 To 10
+    MessageBox.Show("Hello")
+Next
+
+Do Until repeats until the condition becomes True.
+
+NESTED LOOPS
+A loop inside another loop. Example: a clock, where hours, minutes and seconds are three loops inside each other.

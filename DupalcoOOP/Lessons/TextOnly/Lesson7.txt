@@ -1,0 +1,373 @@
+﻿LESSON 7
+ARRAYS
+============================================================
+
+IN THIS LESSON
+  • What Is an Array
+  • Declaring Arrays
+  • One-Dimension Arrays
+  • Two-Dimensional Arrays
+  • Three Dimensions and Beyond
+  • Arrays and Procedures
+  • Laboratory Activity
+
+
+------------------------------------------------------------
+SLIDE 2  –  Learning Outcomes
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• 1. Define syntax of array
+• 2. Define two types of array
+• 3. Discuss array initialization
+
+------------------------------------------------------------
+SLIDE 3  –  Arrays
+------------------------------------------------------------
+
+• Arrays are like groups of variables that allow you to store sets of similar data
+  – A single dimension array is useful for storing and working with a single set of data
+  – A multidimensional array can be used to store and work with multiple sets of data
+• Array programming techniques covered
+  – Summing and averaging all the elements in an array
+  – Summing all the columns in a two-dimensional array
+  – Searching an array for a specific value
+  – Using parallel arrays
+
+------------------------------------------------------------
+SLIDE 4  –  Array Characteristics
+------------------------------------------------------------
+
+• An array stores multiple values of same type
+  – Like a group of variables with a single name
+• For example, the days of the week might be:
+  – A set of 7 string variables
+  – With a maximum length of 9 characters
+• All variables within an array are called elements and must be of the same data type
+• You access the elements in an array through a subscript
+
+------------------------------------------------------------
+SLIDE 5  –  Declaring an Array
+------------------------------------------------------------
+
+• Declare an array much like a regular variable
+  – ArrayName is the name of the array
+  – UpperSubscript is the value of the array's highest subscript
+    – Must be a positive Integer
+    – Positive Integer named constant
+    – Integer variable containing a positive number
+  – DataType is a Visual Basic data type
+
+      Dim ArrayName (UpperSubscript) As DataType
+
+
+------------------------------------------------------------
+SLIDE 6  –  Declaring an Array (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Array Declaration Example
+• This statement declares intHours as an array of Integers
+• Consists of seven elements with subscripts 0 through 6
+• Array elements are initialized to 0
+
+------------------------------------------------------------
+SLIDE 7  –  Default Initialization
+------------------------------------------------------------
+
+• All elements of an Integer array are initialized to zero
+• Same initialization as an integer variable
+• Each array element is initialized exactly the same as a simple variable of that data type
+
+      Decimal elements are initialized to zero (0.0)
+
+• String elements are initialized to the special value Nothing
+
+------------------------------------------------------------
+SLIDE 8  –  Default Initialization (cont.)
+------------------------------------------------------------
+
+• Implicit Array Sizing and Initialization
+• An array can be initialized when declared
+• Example:
+
+      This array is implicitly sized
+
+• Upper subscript value is left blank
+• Number of elements implied from initialization
+• Upper subscript of 5 implied by this example
+• This results in a 6 element array
+• Elements are assigned the values shown
+
+      Dim intNumbers() As Integer = { 2, 4, 6, 8, 10, 12 }
+
+
+------------------------------------------------------------
+SLIDE 9  –  Using Named Constants as Subscripts in Array Declarations
+------------------------------------------------------------
+
+• A named constant may be used as an array's highest subscript instead of a number
+• This is a common use for named constants
+  – Highest subscript is often used multiple times
+  – If highest subscript changes, use of a named constant allows it to be changed in one place
+
+      Const intMAX_SUBSCRIPT As Integer = 100
+      Dim intArray(intMAX_SUBSCRIPT) As Integer
+
+
+------------------------------------------------------------
+SLIDE 10  –  One Dimension Array
+------------------------------------------------------------
+
+• An Array is a listof values – all values in an array are referenced by using the same name.
+• An array is like a ListBox without the box where the list of values are all stored in memory.
+• Arrays are also called tables.
+• Arrays are based on the System.Array object – a type of collection object.  Arrays can store almost any type of data such as integer, string, decimal, etc.
+• Element – this is the term used to refer to an individual part of an array.
+• Index: 0 1 2 3 4 5
+• Value: 2 4 6 8 10 12
+
+------------------------------------------------------------
+SLIDE 11  –  One Dimension Array (cont.)
+------------------------------------------------------------
+
+• Each element is numbered beginning with the number zero.  Example, 0, 1, 2, 3, etc.
+• The number referring to an array elementis placed inside parentheses and is called a subscript or index.  This is the general format for an array reference.
+• ArrayName(ElementNumber)
+• Example references to array elements:
+• Element 4 of the array named AmountDecimal – remember that arrays start with 0 so the 4th element is numbered 3
+• AmountDecimal(3)
+
+------------------------------------------------------------
+SLIDE 12  –  Two-Dimensional Arrays
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• An array with one subscript is called a one-dimensional array
+  – Useful for storing and working with a single set of data
+• A two-dimensional array is like an array of arrays
+  – Used to hold multiple sets of values
+  – Think of it as having rows and columns of elements
+
+------------------------------------------------------------
+SLIDE 13  –  Declaring a Two-Dimensional Array
+------------------------------------------------------------
+
+• A two-dimensional array declaration requires two sets of upper subscripts
+• First upper subscript is for the rows
+• Second upper subscript for the columns
+• ArrayName is the name of the array
+• UpperRow is the value of the highest row subscript
+
+      Must be a positive integer
+
+• UpperColumn is the value of the highest column subscript
+
+      Must be a positive integer
+
+• DataType is the Visual Basic data type
+• Example declaration with three rows and four columns:
+
+      Dim ArrayName (UpperRow,UpperColumn) As DataType
+
+
+      Dim dblScores (2, 3) As Double
+
+
+------------------------------------------------------------
+SLIDE 14  –  Processing Data in Two-Dimensional Arrays
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Use named constants to specify the upper subscripts
+
+------------------------------------------------------------
+SLIDE 15  –  Processing Data in Two-Dimensional Arrays (cont.)
+------------------------------------------------------------
+
+• Example of storing a number in a single element
+• Example of prompting the user for input, once for each element
+• Example of displaying all of the elements in the array
+
+      dblScores(2, 1) = 95
+
+
+      For intRow = 0 To intMAX_ROW
+          For intCol = 0 To intMAX_COL
+              dblScores(intRow, intCol) =
+              CDbl(InputBox("Enter a score."))
+          Next
+      Next
+
+
+      For intRow = 0 To intMAX_ROW
+          For intCol = 0 To intMAX_COL
+              lstOutput.Items.Add(dblScores(intRow, intCol).ToString())
+          Next
+      Next
+
+
+------------------------------------------------------------
+SLIDE 16  –  Three-Dimensional Arrays and Beyond
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• You can create arrays with up to 32 dimensions
+• The following is an example of a three-dimensional array:
+
+------------------------------------------------------------
+SLIDE 17  –  Three-Dimensional Arrays and Beyond (cont.)
+------------------------------------------------------------
+
+• Arrays with more than three dimension are difficult to visualize
+  – Useful in some programming applications
+  – For example:
+    – A factory warehouse where cases of widgets are stacked on pallets, an array of four dimensions can store a part number for each widget
+    – The four subscripts of each element can store:
+      – Pallet number
+      – Case number
+      – Row number
+      – Column number
+    – A five dimensional array could be used for multiple warehouses
+
+------------------------------------------------------------
+SLIDE 18  –  Functions
+------------------------------------------------------------
+
+
+      Declaring a Function
+      New keyword Function
+
+• Also new is As DataType which states the data type of the value to be returned
+
+      Return value is specified in a Return expression
+
+
+      [AccessSpecifier] Function FunctionName ([ParameterList]) As DataType
+      [Statements]
+      End Function
+
+
+------------------------------------------------------------
+SLIDE 19  –  Functions (cont.)
+------------------------------------------------------------
+
+
+      The Sum function
+
+• Passes the variables dblValue1 and dblValue2 as arguments
+• Data types must agree with parameter list
+• Assigns the value returned by the Sum function to the variable dblTotal, agrees with return value
+
+      dblTotal = Sum(dblValue1, dblValue2)
+      Function Sum(ByVal dblNum1 As Double, ByVal dblNum2 As Double)
+          As Double
+          Return dblNum1 + dblNum2
+      End Function
+
+
+------------------------------------------------------------
+SLIDE 20  –  Functions (cont.)
+------------------------------------------------------------
+
+• Returning Nonnumeric Values
+• Functions can return nonnumeric values, such as strings and Boolean values
+
+      strCustomer = FullName("John", "Martin")
+      Function FullName(ByVal strFirst As String,
+          ByVal strLast As String) As String
+          ' Local variable to hold the full name
+          Dim strName As String
+          ' Append the last name to the first
+          ' name and assign the result to strName.
+          strName = strFirst & " " & strLast
+          ' Return the full name.
+          Return strName
+      End Function
+
+
+------------------------------------------------------------
+SLIDE 21  –  Procedures and Functions That Work with Arrays
+------------------------------------------------------------
+
+• Procedures can be written to process the data in arrays
+  – Store data in an array
+  – Display an array’s contents
+  – Sum or average the values in an array
+• Usually such procedures accept an array as an argument
+  – Pass the name of the array as the argument to the procedure or function
+• Passing Arrays as Arguments
+
+      ' The DisplaySum procedure displays the
+      ' sum of the elements in the argument array.
+      Sub DisplaySum(ByVal intArray() As Integer)
+          Dim intTotal As Integer = 0  ' Accumulator
+          Dim intCount As Integer      ' Loop counter
+          For intCount = 0 To (intArray.Length - 1)
+              intTotal += intArray(intCount)
+          Next
+          MessageBox.Show("The total is " &
+          intTotal.ToString())
+      End Sub
+
+
+      Dim intNumbers() As Integer =
+
+• { 2, 4, 7, 9, 8, 12, 10 }
+
+      DisplaySum(intNumbers)
+
+
+------------------------------------------------------------
+SLIDE 22  –  Returning an Array from a Function
+------------------------------------------------------------
+
+• demonstrates passing an array to procedures and functions
+
+      ' Get three names from the user and return
+      ' them as an array of strings.
+      Function GetNames() As String()
+          Const intMAX_SUBSCRIPT As Integer = 2
+          Dim strNames(intMAX_SUBSCRIPT) As String
+          Dim intCount As Integer
+          For intCount = 0 To 3
+              strNames(intCount) = InputBox("Enter name " &
+              (intCount.ToString())
+          Next
+          Return strNames
+      End Function
+
+
+      Dim strCustomers() As String
+      strCustomers = GetNames()
+
+
+------------------------------------------------------------
+SLIDE 24  –  Returning an Array from a Function (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 25  –  Returning an Array from a Function (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 26  –  Returning an Array from a Function (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 27  –  Returning an Array from a Function (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 28  –  Take a picture and upload to your personal folder under midterm.
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]

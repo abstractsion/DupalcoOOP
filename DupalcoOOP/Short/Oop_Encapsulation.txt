@@ -1,0 +1,38 @@
+ENCAPSULATION
+
+WHAT IT IS
+Encapsulation bundles data and the methods that use it inside one class, and hides the data from the outside. Other code can only reach the data through methods, which protects it from misuse.
+
+REAL-LIFE EXAMPLE
+An ATM. You cannot reach into the bank's vault and change your balance. You can only press Deposit or Withdraw, and the machine checks the request first.
+
+KEY POINTS
+- Private fields cannot be touched from outside the class.
+- Public methods are the only way in.
+- Methods can check the data before accepting it.
+- This keeps the data valid and the code easier to maintain.
+
+EXAMPLE CODE
+Public Class BankAccount
+    Private balance As Decimal
+
+    Public Function Deposit(amount As Decimal) As Boolean
+        If amount > 0 Then
+            balance += amount
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public Function GetBalance() As Decimal
+        Return balance
+    End Function
+End Class
+
+Dim acct As New BankAccount()
+acct.Deposit(500)             ' accepted
+acct.Deposit(-50)             ' rejected
+acct.balance = 999999         ' ERROR: balance is Private
+
+WHAT THE DEMO DOES
+Type an amount and click EXECUTE to deposit it. Try 500, then -50. The class accepts the first and rejects the second. The balance carries over between clicks.

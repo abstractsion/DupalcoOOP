@@ -1,0 +1,151 @@
+﻿LESSON 2
+INTRODUCTION TO OOP
+============================================================
+
+IN THIS LESSON
+  • OOP Overview
+  • Classes and Objects
+  • Encapsulation
+  • Inheritance
+  • Polymorphism
+  • Interfaces
+  • Wrap-up
+
+
+------------------------------------------------------------
+SLIDE 2  –  Learning Outcomes
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• Explain Object-Oriented Programming in Visual Basic
+• Understand Classes and Objectsin Visual Basic.NET
+• Understand Encapsulation in Visual Basic.NET
+• Understand Inheritance in Visual Basic.NET
+• Understand Classes and Polymorphism in Visual Basic.NET
+• Understand Interfaces in Visual Basic.NET
+
+------------------------------------------------------------
+SLIDE 3  –  OOP
+------------------------------------------------------------
+
+• Visual Basic provides full support for object-oriented programming including encapsulation, inheritance, and polymorphism.
+
+------------------------------------------------------------
+SLIDE 4  –  Classes and objects
+------------------------------------------------------------
+
+• The terms class and object are sometimes used interchangeably, but in fact, classes describe the type of objects, while objects are usable instances of classes. So, the act of creating an object is called instantiation. Using the blueprint analogy, a class is a blueprint, and an object is a building made from that blueprint.
+
+------------------------------------------------------------
+SLIDE 5  –  Classes and objects
+------------------------------------------------------------
+
+
+      Public Class Person
+          Public Name As String
+          Public Age As Integer
+      End Class
+      Dim p As New Person()
+      p.Name = "Alice"
+      p.Age = 30
+
+
+------------------------------------------------------------
+SLIDE 6  –  Encapsulation
+------------------------------------------------------------
+
+• Encapsulation is a fundamental concept in object-oriented programming (OOP) that involves bundling the data (attributes) and the methods (functions or procedures) that operate on that data within a single unit, typically a class. It restricts direct access to some of an object's components, which helps to protect the integrity of the data and prevents unintended interference or misuse.
+• By using encapsulation, an object's internal state is hidden from the outside world, and access is only possible through well-defined interfaces, such as getter and setter methods. This promotes modularity, maintainability, and security within the software design.
+
+------------------------------------------------------------
+SLIDE 7  –  Encapsulation
+------------------------------------------------------------
+
+
+      Public Class BankAccount
+          Private balance As Decimal
+          Public Sub Deposit(amount As Decimal)
+              If amount > 0 Then
+                  balance += amount
+              End If
+          End Sub
+          Public Function GetBalance() As Decimal
+              Return balance
+          End Function
+      End Class
+
+
+------------------------------------------------------------
+SLIDE 8  –  Inheritance
+------------------------------------------------------------
+
+• Inheritance is a core concept in object-oriented programming (OOP) that allows a class (called a subclass or derived class) to inherit properties and behaviors (methods) from another class (called a superclass or base class). This mechanism promotes code reuse and establishes a hierarchical relationship between classes.
+• Key points about inheritance:
+• Reusability: Subclasses can reuse code from the superclass, reducing redundancy.
+• Extensibility: Subclasses can add new attributes or methods or override existing ones to modify behavior.
+• Hierarchical Structure: It models real-world relationships, such as a "Car" class inheriting from a "Vehicle" class.
+• For example, if you have a superclass "Animal" with methods like "eat()" and "sleep()," a subclass "Dog" can inherit these methods and also have additional behaviors like "bark()."
+
+------------------------------------------------------------
+SLIDE 9  –  Inheritance
+------------------------------------------------------------
+
+
+      Public Class Animal
+          Public Overridable Sub Speak()
+              Console.WriteLine("Animal speaks")
+          End Sub
+      End Class
+      Public Class Dog
+          Inherits Animal
+          Public Overrides Sub Speak()
+              Console.WriteLine("Dog barks")
+          End Sub
+      End Class
+
+
+------------------------------------------------------------
+SLIDE 10  –  Polymorphism
+------------------------------------------------------------
+
+• Polymorphism is a fundamental concept in object-oriented programming that allows objects of different classes to be treated as instances of a common superclass. It enables a single interface to represent different underlying data types or behaviors, facilitating flexibility and extensibility in code. Polymorphism can be achieved through method overriding, where a subclass provides a specific implementation of a method defined in its superclass, or through method overloading, where multiple methods share the same name but differ in parameters. This concept is essential for designing systems that are modular, maintainable, and scalable.
+
+------------------------------------------------------------
+SLIDE 11  –  Polymorphism
+------------------------------------------------------------
+
+
+      Dim a As Animal = New Dog()
+      a.Speak()  ' Outputs: Dog barks
+
+
+------------------------------------------------------------
+SLIDE 12  –  Interfaces
+------------------------------------------------------------
+
+• interfaces are used to define a contract that classes can implement. An interface specifies a set of methods, properties, events, or indexers that implementing classes must provide, without providing the actual implementation itself. This allows for a form of abstraction and promotes loose coupling in your code.
+
+------------------------------------------------------------
+SLIDE 13  –  Interfaces
+------------------------------------------------------------
+
+
+      Public Interface IPrintable
+          Sub Print()
+      End Interface
+      Public Class Document
+          Implements IPrintable
+          Public Sub Print() Implements IPrintable.Print
+              Console.WriteLine("Printing Document...")
+          End Sub
+      End Class
+
+
+------------------------------------------------------------
+SLIDE 14  –  Interfaces (cont.)
+------------------------------------------------------------
+
+• Why Use OOP in VB?
+• Makes code more organized, reusable, and maintainable.
+• Enables modular design.
+• Helps in building larger applications more efficiently.

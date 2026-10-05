@@ -1,0 +1,77 @@
+LESSON 2: INTRODUCTION TO OOP
+
+WHAT IS OOP
+Visual Basic fully supports object-oriented programming: encapsulation, inheritance and polymorphism.
+
+WHY USE IT
+- Code is more organized, reusable and easier to maintain.
+- Supports modular design.
+- Helps build larger applications.
+
+CLASSES AND OBJECTS
+A class is the blueprint. An object is a real thing built from that blueprint. Creating an object is called instantiation.
+
+Example:
+Public Class Person
+    Public Name As String
+    Public Age As Integer
+End Class
+
+Dim p As New Person()
+p.Name = "Alice"
+p.Age = 30
+
+ENCAPSULATION
+Keep the data and the methods that use it together in one class, and hide the data so it can only be changed through methods. This protects the data from misuse.
+
+Example:
+Public Class BankAccount
+    Private balance As Decimal
+    Public Sub Deposit(amount As Decimal)
+        If amount > 0 Then
+            balance += amount
+        End If
+    End Sub
+    Public Function GetBalance() As Decimal
+        Return balance
+    End Function
+End Class
+
+INHERITANCE
+A class (subclass) can reuse the properties and methods of another class (base class), and can add or override behavior. Example: Dog inherits from Animal.
+
+Example:
+Public Class Animal
+    Public Overridable Sub Speak()
+        Console.WriteLine("Animal speaks")
+    End Sub
+End Class
+
+Public Class Dog
+    Inherits Animal
+    Public Overrides Sub Speak()
+        Console.WriteLine("Dog barks")
+    End Sub
+End Class
+
+POLYMORPHISM
+Objects of different classes can be treated as their common base class, and the same call behaves differently for each. It works through overriding (subclass changes a method) and overloading (same method name, different parameters).
+
+Example:
+Dim a As Animal = New Dog()
+a.Speak()   ' Outputs: Dog barks
+
+INTERFACES
+An interface is a contract: it lists the methods a class must have, without writing the code. Classes that implement it must provide them.
+
+Example:
+Public Interface IPrintable
+    Sub Print()
+End Interface
+
+Public Class Document
+    Implements IPrintable
+    Public Sub Print() Implements IPrintable.Print
+        Console.WriteLine("Printing Document...")
+    End Sub
+End Class

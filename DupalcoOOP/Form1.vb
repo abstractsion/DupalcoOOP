@@ -18,13 +18,27 @@ Public Class Form1
     End Sub
 
     Private Sub P5Menu1_ItemClicked(text As String) Handles P5Menu1.ItemClicked
-        If text = "HELP" OrElse text = "BSIT2E" Then Return   ' highlight and slash only, no pop-up
+        If text = "HELP" OrElse text = "BSIT2E" Then Return
 
         If text = "EXIT" Then
             Application.Exit()
-        Else
-            MessageBox.Show("You clicked: " & text)
+            Return
         End If
+        Select Case text
+            Case "Classes and Objects", "Encapsulation", "Inheritance", "Polymorphism", "Interfaces",
+             "Computer Programming and Translators", "What a Program is Made Of", "Exploring the IDE", "Console Application"
+                Dim o As New OopLesson()
+                o.LoadTopic(text)
+                o.ShowDialog(Me)
+                Return
+        End Select
+        Dim n = text.Split("."c)(0)
+        If Not IsNumeric(n) Then Return
+
+        Dim f As New LessonForm()
+        f.LoadLesson(text)
+        f.ShowDialog(Me)
+
     End Sub
 
     ' Hide the title plates while a menu section is open so the list stays readable
@@ -49,6 +63,10 @@ Public Class Form1
     End Sub
 
     Private Sub P5Plate2_Click_1(sender As Object, e As EventArgs) Handles P5Plate2.Click
+
+    End Sub
+
+    Private Sub P5Backdrop1_Paint(sender As Object, e As PaintEventArgs) Handles P5Backdrop1.Paint
 
     End Sub
 End Class

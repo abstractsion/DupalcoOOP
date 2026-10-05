@@ -1,0 +1,36 @@
+CLASSES AND OBJECTS
+
+WHAT IT IS
+A class describes what something has (fields) and what it can do (methods). An object is one real thing made from that class. Making an object is called instantiation, and we use the New keyword.
+
+REAL-LIFE EXAMPLE
+A student record form is the class. Ana's filled-in form and Ben's filled-in form are objects. They follow the same form, but each holds different details.
+
+KEY POINTS
+- One class can make many objects.
+- Each object keeps its own data.
+- Fields hold data. Methods do actions.
+- Changing one object does not change the others.
+
+EXAMPLE CODE
+Public Class Student
+    Public Name As String
+    Public Grade As Integer
+
+    Public Sub Improve(points As Integer)
+        Grade += points
+    End Sub
+End Class
+
+Dim s1 As New Student()
+s1.Name = "Ana"
+s1.Grade = 85
+
+Dim s2 As New Student()
+s2.Name = "Ben"
+s2.Grade = 80
+
+s1.Improve(5)
+
+WHAT THE DEMO DOES
+Type a name and click EXECUTE. It creates two Student objects, raises the first one's grade by 5, and shows that the second one did not change.

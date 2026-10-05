@@ -1,0 +1,250 @@
+﻿LESSON 3
+GETTING STARTED WITH MICROSOFT VISUAL BASIC .NET
+============================================================
+
+IN THIS LESSON
+  • Programming Basics
+  • Programming Languages
+  • What a Program Is Made Of
+  • Translators
+  • Exploring the IDE
+  • IDE Windows
+  • Docking Windows
+  • Console Application
+
+
+------------------------------------------------------------
+SLIDE 2  –  Learning Outcomes
+------------------------------------------------------------
+
+• At the end of the session, the students should be able to:
+• 1. Define Computer Programming and Translator of            Programming languages;
+• 2. Describe the Integrated Development 	Environment;
+• 3. Demonstrate how to use classes in Visual Basic.NET
+
+------------------------------------------------------------
+SLIDE 3  –  What is Computer Programming?
+------------------------------------------------------------
+
+• Computers can only follow instructions
+• A computer program is a set of instructions on how to solve a problem or perform a task
+• Computer programming is the process of developing and implementing various sets of instructions to enable a computer to do a certain task. These instructions are considered computer programs and help the computer to operate smoothly.
+
+------------------------------------------------------------
+SLIDE 4  –  Programming Languages
+------------------------------------------------------------
+
+• The steps in an algorithm must be stated in a form the computer understands
+• The CPU processes a series of 1’s and 0’s called machine language instructions
+• This is a tedious and difficult format for people
+• Programming languages allow us to use words instead of numbers
+• Special software called a compiler converts the programming language statements to machine language instructions
+
+------------------------------------------------------------
+SLIDE 5  –  Popular Programming Languages
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 6  –  What is a Program Made Of?
+------------------------------------------------------------
+
+• Keywords (Reserved Words)
+  – Words with special meaning  that make up a high-level programming language, cannot be used for any other purpose
+• Operators
+  – Special symbols that perform various operations on data
+• Variables
+  – Used to store data in memory, named by the programmer
+
+------------------------------------------------------------
+SLIDE 7  –  What is a Program Made Of? (cont.)
+------------------------------------------------------------
+
+• Syntax
+  – Set of rules
+  – Similar to the syntax (rules) of a spoken language, such as English, but must be strictly followed
+  – If even a single syntax error appears in a program, it will not compile or execute
+• Statements
+  – Instructions made up of keywords, variables, and operators.
+  – Called source code, or simply code
+
+------------------------------------------------------------
+SLIDE 8  –  What is a Program Made Of? (cont.)
+------------------------------------------------------------
+
+• Procedures
+  – Set of programming statements that perform a specific task
+• Comments (Remarks)
+  – Ignored when the program runs, help human reader understand the purpose of programming statements
+  – In Visual Basic, any statement that begins with an apostrophe (')
+
+------------------------------------------------------------
+SLIDE 9  –  Translation of Programming Languages
+------------------------------------------------------------
+
+• A translator or programming language processor is a computer program that performs the translation of a program written in a given programming language into a functionally equivalent program in another computer language (the target language), without losing the functional or logical structure of the original code (the "essence" of each program).
+
+------------------------------------------------------------
+SLIDE 10  –  Exploring the IDE
+------------------------------------------------------------
+
+• An integrated development environment (IDE) is a software application that provides comprehensive facilities to computer programmers for software development. An IDE normally consists of a source code editor, build automation tools, and a debugger.
+
+------------------------------------------------------------
+SLIDE 11  –  The start page
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 12  –  Starting a new project
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 13  –  Starting a new project (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 14  –  The Menu Bar
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The menu bar appears at the top of the Visual Studio window
+  – Provides menus such as:
+
+------------------------------------------------------------
+SLIDE 15  –  The Standard Toolbar
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The standard toolbar contains buttons that execute frequently used commands
+  – Provides quick access to commands that would otherwise be executed from a menu
+
+------------------------------------------------------------
+SLIDE 16  –  The Toolbox
+------------------------------------------------------------
+
+• The Toolbox is a window for selecting controls to use in an application’s user interface
+  – Divided into sections such as All Windows Forms and Common Controls
+  – To open a section, click on its name tab
+  – To close a section, click on its name tab again
+  – Move a section to the top by dragging its name with the mouse
+
+------------------------------------------------------------
+SLIDE 17  –  The Toolbox (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Toolbox typically appears on the left side of Visual Studio environment
+  – If the toolbox is in Auto Hide mode
+  – Clicking on the tab will display the window
+
+------------------------------------------------------------
+SLIDE 18  –  Solution Explorer window
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• This is a section that is used to view and modify the contents of the project. A Visual Studio Windows Application Project will generally have a Form object with a code page, references to System components and possibly other modules with special code that is used by the application.
+
+------------------------------------------------------------
+SLIDE 19  –  Properties Window
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The properties windows shows all the control (like TextBox) properties to be changed at design time. Most of these properties can be also changed with code at run time, but basically most properties change the way the control is displayed on your application.
+
+------------------------------------------------------------
+SLIDE 20  –  Form Designer Window
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Form Designer allows you to design your application's user interface visually by dragging controls onto a design-time representation of your application. Once the controls are on the form, you can visually position the controls, set their properties through the Properties window, and create event handlers for the events.
+
+------------------------------------------------------------
+SLIDE 21  –  Output, Error List and Command Window
+------------------------------------------------------------
+
+• The Output window can display status messages for various features in the integrated development environment (IDE). To open the Output window, on the menu bar, choose View/Output (or click CTRL + ALT + O).
+• The Error List displays information about a specific error message. You can copy the error number or error string text from the Output window. To display the Output window, press Ctrl+Alt+O.
+
+------------------------------------------------------------
+SLIDE 22  –  Output, Error List and Command Window (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• The Command window is used to execute commands or aliases directly in the Visual Studio integrated development environment (IDE). You can execute both menu commands and commands that do not appear on any menu. To display the Command window, choose Other Windows from the View menu, and select Command Window.
+
+------------------------------------------------------------
+SLIDE 23  –  Auto Hide
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• Many windows have a feature known as Auto Hide
+  – Allows for more room to view an application’s forms and code
+  – Click on the pushpin icon to turn auto hide on or off
+
+------------------------------------------------------------
+SLIDE 24  –  Using ToolTips
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+• A ToolTip is a small rectangular box that pops up when you hover the mouse pointer over a button on the toolbar or Toolbox for a few seconds
+  – Contains a short description of the button’s purpose
+  – Use a ToolTip whenever you cannot remember a particular button’s function
+
+------------------------------------------------------------
+SLIDE 25  –  Docked and Floating Windows
+------------------------------------------------------------
+
+• When a window is docked
+  – It is attached to one of the edges of the Visual Studio environment
+• When a window is floating
+  – You can resize the window as well as click and drag it by its title bar
+  – Right-click a window’s title bar and select Float or Dock to change between floating or docked
+
+------------------------------------------------------------
+SLIDE 26  –  Floating Toolbox, Solution Explorer, and Properties Windows
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 27  –  Console Application
+------------------------------------------------------------
+
+• Console Applications have recently been introduced in Visual Basic .NET, they are command-line based applications. Console Applications allow us to write data to the console read data from the console, and run in within a DOS Shell. They do not support Windows GUI's. Console Applications are supported by the system. Console namespace.
+
+------------------------------------------------------------
+SLIDE 28  –  Building a Console Application
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 29  –  Building a Console Application (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 30  –  Building a Console Application (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 31  –  Building a Console Application (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]
+
+------------------------------------------------------------
+SLIDE 32  –  Building a Console Application (cont.)
+------------------------------------------------------------
+
+[Picture slide – the picture is in the .rtf version]

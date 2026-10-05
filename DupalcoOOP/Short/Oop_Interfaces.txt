@@ -1,0 +1,32 @@
+INTERFACES
+
+WHAT IT IS
+An interface is a contract. It lists the methods a class must have, but does not write the code. Any class that implements the interface must provide those methods.
+
+REAL-LIFE EXAMPLE
+A power plug socket. Any device with the right plug works in it, whether it is a lamp or a charger.
+
+KEY POINTS
+- An interface lists what to do, not how.
+- A class uses Implements to follow the contract.
+- Different classes can be handled the same way through the interface.
+- This keeps code flexible and loosely coupled.
+
+EXAMPLE CODE
+Public Interface IPrintable
+    Function Print() As String
+End Interface
+
+Public Class Document
+    Implements IPrintable
+
+    Public Function Print() As String Implements IPrintable.Print
+        Return "Printing Document..."
+    End Function
+End Class
+
+Dim p As IPrintable = New Document()
+p.Print()
+
+WHAT THE DEMO DOES
+Pick Document, Photo or Report and click EXECUTE. It prints your choice through the IPrintable interface, then prints all three the same way.

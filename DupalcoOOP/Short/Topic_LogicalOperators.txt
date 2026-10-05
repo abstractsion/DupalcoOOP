@@ -1,0 +1,15 @@
+LESSON: Logical Operators
+
+Logical operators allow you to combine multiple conditions inside your conditional statements (like 'If' statements).
+
+Core Logical Operators in VB.NET:
+- And / AndAlso: Returns True only if ALL conditions are true. ('AndAlso' stops evaluating early if the first condition is false).
+- Or / OrElse: Returns True if AT LEAST ONE condition is true.
+- Not: Reverses the boolean result (turns True to False, and vice versa).
+
+Example:
+If age >= 18 And hasId = True Then
+    Console.WriteLine("Access Granted")
+End If
+
+Click EXECUTE to evaluate logical conditions!

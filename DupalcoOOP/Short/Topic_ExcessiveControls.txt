@@ -1,0 +1,10 @@
+LESSON: Excessive Controls
+
+Managing too many controls on a single form can clutter your user interface and make your application hard to maintain. 
+
+Best Practices for UI Design:
+- Grouping: Use Panel or GroupBox controls to organize related elements logically.
+- Reusability: Instead of creating 50 individual labels, use loops or shared components where possible.
+- Visibility Control: Hide or show sections dynamically rather than crowding the screen all at once.
+
+Keeping your layout clean ensures a great user experience. Click EXECUTE to see how the app handles multiple components!

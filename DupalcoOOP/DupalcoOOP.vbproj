@@ -86,6 +86,8 @@
     <Compile Include="OopLesson.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OopLessonTopics.vb">
+    </Compile>
     <Compile Include="P5Backdrop.vb">
       <SubType>Component</SubType>
     </Compile>

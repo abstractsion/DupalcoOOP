@@ -1,0 +1,10 @@
+LESSON: Month Listbox
+
+A ListBox control is a Windows Form element used to display a list of items from which the user can select one or more entries.
+
+Working with ListBoxes in VB.NET:
+- Adding items: ListBox1.Items.Add("January")
+- Clearing items: ListBox1.Items.Clear()
+- Getting selection: Dim selectedMonth As String = ListBox1.SelectedItem.ToString()
+
+Listboxes make UI design clean when presenting choices like months, categories, or options to the user. Click EXECUTE to populate the listbox demo!

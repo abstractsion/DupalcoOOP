@@ -18,22 +18,29 @@ Public Class Form1
     End Sub
 
     Private Sub P5Menu1_ItemClicked(text As String) Handles P5Menu1.ItemClicked
-        If text = "HELP" OrElse text = "BSIT2E" Then Return
+
+        If text = "HELP" OrElse text = "BSIT2E" OrElse text = "About" Then Return
 
         If text = "EXIT" Then
             Application.Exit()
             Return
         End If
+
         Select Case text
-            Case "Classes and Objects", "Encapsulation", "Inheritance", "Polymorphism", "Interfaces",
-             "Computer Programming and Translators", "What a Program is Made Of", "Exploring the IDE", "Console Application"
-                Dim o As New OopLesson()
+            Case "Classes and Objects", "Encapsulation", "Inheritance", "Polymorphism",
+         "Interfaces", "Computer Programming and Translators",
+         "What a Program is Made of", "Exploring the IDE", "Console Application",
+         "Data Types And Arithmetic Operations", "Data Handling",
+         "Variable Names", "Logical Operators",
+         "Array Example", "Month Listbox",
+         "Control Sample", "Text Properties Manipulator",
+         "Excessive Controls"
+
+                Dim o As New OopLessonTopics()
                 o.LoadTopic(text)
                 o.ShowDialog(Me)
                 Return
         End Select
-        Dim n = text.Split("."c)(0)
-        If Not IsNumeric(n) Then Return
 
         Dim f As New LessonForm()
         f.LoadLesson(text)

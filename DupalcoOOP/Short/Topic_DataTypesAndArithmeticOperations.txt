@@ -1,0 +1,19 @@
+LESSON: Data Types and Arithmetic Operations
+
+Data types specify the type of data that a variable can hold, such as integers, floating-point numbers, strings, or booleans. 
+
+In Visual Basic (VB.NET):
+- Integer: Used for whole numbers (e.g., 10, -3, 42)
+- Double / Single: Used for numbers with decimals (e.g., 7.5, 3.14)
+- String: Used for text (e.g., "Hello, World!")
+- Boolean: True or False values
+
+Arithmetic Operations allow you to perform math calculations:
+- Addition (+)
+- Subtraction (-)
+- Multiplication (*)
+- Division (/)
+- Integer Division (\)
+- Modulus (Mod - remainder of division)
+
+Try entering two numbers separated by a comma in the box below and click EXECUTE to see them in action!

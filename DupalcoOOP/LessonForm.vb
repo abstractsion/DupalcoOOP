@@ -2,8 +2,17 @@
 
     Public Sub LoadLesson(menuText As String)
         lblTitle.Text = menuText
+
         Dim n = menuText.Split("."c)(0)
-        Dim path = IO.Path.Combine(Application.StartupPath, "..", "..", "Short", "Lesson" & n & ".txt")
+        Dim fileName As String
+
+        If IsNumeric(n) Then
+            fileName = "Lesson" & n & ".txt"
+        Else
+            fileName = menuText.Replace(" ", "_") & ".txt"
+        End If
+
+        Dim path = IO.Path.Combine(Application.StartupPath, "..", "..", "Short", fileName)
         If IO.File.Exists(path) Then
             rtbNotes.Text = IO.File.ReadAllText(path)
         Else
@@ -15,4 +24,7 @@
         Me.Close()
     End Sub
 
+    Private Sub LessonForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

@@ -33,9 +33,10 @@ Partial Class LessonForm
         Me.lblTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 13.875!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.Color.White
-        Me.lblTitle.Location = New System.Drawing.Point(50, 30)
+        Me.lblTitle.Location = New System.Drawing.Point(25, 16)
+        Me.lblTitle.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(128, 50)
+        Me.lblTitle.Size = New System.Drawing.Size(67, 25)
         Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "Label1"
         '
@@ -44,32 +45,35 @@ Partial Class LessonForm
         Me.rtbNotes.BackColor = System.Drawing.Color.FromArgb(CType(CType(10, Byte), Integer), CType(CType(10, Byte), Integer), CType(CType(40, Byte), Integer))
         Me.rtbNotes.Font = New System.Drawing.Font("Segoe UI", 14.0!)
         Me.rtbNotes.ForeColor = System.Drawing.Color.White
-        Me.rtbNotes.Location = New System.Drawing.Point(60, 110)
+        Me.rtbNotes.Location = New System.Drawing.Point(30, 57)
+        Me.rtbNotes.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.rtbNotes.Name = "rtbNotes"
         Me.rtbNotes.ReadOnly = True
-        Me.rtbNotes.Size = New System.Drawing.Size(1080, 470)
+        Me.rtbNotes.Size = New System.Drawing.Size(542, 246)
         Me.rtbNotes.TabIndex = 1
         Me.rtbNotes.Text = ""
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(60, 610)
+        Me.btnBack.Location = New System.Drawing.Point(30, 317)
+        Me.btnBack.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(160, 50)
+        Me.btnBack.Size = New System.Drawing.Size(80, 26)
         Me.btnBack.TabIndex = 2
         Me.btnBack.Text = "BACK"
         Me.btnBack.UseVisualStyleBackColor = True
         '
         'LessonForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.DupalcoOOP.My.Resources.Resources._41e3d16b2aaf512abf1fcceb5099656a
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1542, 812)
+        Me.ClientSize = New System.Drawing.Size(771, 422)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.rtbNotes)
         Me.Controls.Add(Me.lblTitle)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
         Me.Name = "LessonForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

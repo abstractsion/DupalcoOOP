@@ -1,4 +1,4 @@
-﻿Public Class OopLesson
+﻿Partial Public Class OopLessonTopics
 
     Private topic As String
     Private bank As New BankAccount()
@@ -8,7 +8,7 @@
         topic = t
         lblTitle.Text = t
 
-        Dim path = IO.Path.Combine(Application.StartupPath, "..", "..", "Short", "Oop_" & t.Replace(" ", "") & ".txt")
+        Dim path = IO.Path.Combine(Application.StartupPath, "..", "..", "Short", NotesFile(t))
         If IO.File.Exists(path) Then
             rtbNotes.Text = IO.File.ReadAllText(path)
         Else
@@ -59,13 +59,39 @@
                 txtInput.Visible = True
                 txtOutput.BackColor = Color.Black
                 txtOutput.ForeColor = Color.LightGray
+            Case "Data Types And Arithmetic Operations",
+     "Data Handling",
+     "Variable Names",
+     "Logical Operators",
+     "Array Example",
+     "Month Listbox",
+     "Control Sample",
+     "Text Properties Manipulator",
+     "Excessive Controls"
+
+                SetupNewTopic(t)
         End Select
 
         If cboChoice.Visible Then cboChoice.SelectedIndex = 0
     End Sub
 
     Private Sub btnExecute_Click(sender As Object, e As EventArgs) Handles btnExecute.Click
+
         Select Case topic
+
+            Case "Data Types And Arithmetic Operations",
+             "Data Handling",
+             "Variable Names",
+             "Logical Operators",
+             "Array Example",
+             "Month Listbox",
+             "Control Sample",
+             "Text Properties Manipulator",
+             "Excessive Controls"
+
+                RunNewTopic()
+                Return
+
             Case "Classes and Objects" : RunClasses()
             Case "Encapsulation" : RunEncapsulation()
             Case "Inheritance" : RunInheritance()
@@ -75,7 +101,9 @@
             Case "What a Program is Made Of" : RunProgramParts()
             Case "Exploring the IDE" : RunIDE()
             Case "Console Application" : RunConsole()
+
         End Select
+
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

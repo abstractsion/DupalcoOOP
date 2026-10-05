@@ -1,0 +1,11 @@
+LESSON: Data Handling
+
+Data handling refers to the process of gathering, storing, transforming, and managing data safely within an application.
+
+In VB.NET, user input from textboxes is always treated as a String. When handling data for calculations or logic, you must convert or "parse" it into the correct data type.
+
+Common Parsing Methods:
+- Integer.TryParse(input, result): Safely converts a string to an integer without crashing if the user types letters.
+- Double.TryParse(input, result): Safely converts a string to a decimal/double number.
+
+Proper data handling prevents application crashes and unexpected bugs when users enter invalid inputs! Click EXECUTE to see data handling in action.

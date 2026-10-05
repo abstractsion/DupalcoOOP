@@ -1,0 +1,10 @@
+LESSON: Control Sample
+
+Windows Forms controls are the building blocks of a graphical user interface (GUI). Every button, textbox, label, and checkbox you place on a form is a control instance.
+
+Key Controls Explored:
+- TextBox: Allows users to type and edit text.
+- Label: Displays static or dynamic text instructions.
+- Button: Triggers code events when clicked.
+
+Understanding how to manipulate controls programmatically via code is a core skill in VB.NET development. Click EXECUTE to test the control sample!

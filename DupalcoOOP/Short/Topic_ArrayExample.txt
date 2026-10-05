@@ -1,0 +1,10 @@
+LESSON: Array Example
+
+An array is a data structure that stores a fixed-size sequential collection of elements of the same type. Instead of creating separate variables for 12 months, you can store them in a single array.
+
+Key Concepts:
+- Indexing: Arrays are zero-indexed, meaning the first item is at index 0.
+- Declaration: Dim months() As String = {"January", "February", "March"}
+- Length: You can check how many items are in an array using 'months.Length'.
+
+Arrays are essential when dealing with lists of related data in your programs. Click EXECUTE to run the array demo!

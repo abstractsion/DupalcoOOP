@@ -1,0 +1,11 @@
+LESSON: Text Properties Manipulator
+
+Properties define the appearance, behavior, and state of controls in your application. You can modify these properties dynamically through code while the app is running.
+
+Common Text and UI Properties:
+- Text: Changes the displayed text (e.g., txtOutput.Text = "Hello")
+- BackColor: Changes the background color using 'Color.FromArgb(...)' or 'Color.Red'.
+- ForeColor: Changes the text color.
+- Visible / Enabled: Controls whether an element can be seen or interacted with.
+
+Manipulating properties dynamically makes your user interface responsive and interactive! Click EXECUTE to see it in action.

@@ -1,0 +1,11 @@
+LESSON: Coding With Variable Name Conventions
+
+A variable is a named storage location in memory. Following proper naming conventions makes your code readable, maintainable, and professional.
+
+Best Practices for Naming:
+- Use descriptive names: Instead of 'x' or 'temp', use 'studentAge' or 'totalScore'.
+- Camel Case for variables: Start with a lowercase letter and capitalize each subsequent word (e.g., 'userName', 'itemCount').
+- Pascal Case for classes and forms: Capitalize the first letter of every word (e.g., 'OopLesson', 'MainForm').
+- Avoid Reserved Keywords: Do not name variables after built-in commands like 'Dim', 'Class', or 'Integer'.
+
+Consistent naming conventions are a pillar of clean Object-Oriented Programming! Click EXECUTE to test variable naming rules.

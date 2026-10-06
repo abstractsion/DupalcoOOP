@@ -52,17 +52,18 @@ Partial Class Form1
         'P5Plate1
         '
         Me.P5Plate1.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate1.AutoFit = False
         Me.P5Plate1.BackColor = System.Drawing.Color.Transparent
         Me.P5Plate1.Font = New System.Drawing.Font("Segoe UI", 36.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.P5Plate1.ForeColor = System.Drawing.Color.Black
-        Me.P5Plate1.Location = New System.Drawing.Point(150, 365)
+        Me.P5Plate1.Location = New System.Drawing.Point(474, 419)
         Me.P5Plate1.Margin = New System.Windows.Forms.Padding(6)
         Me.P5Plate1.Name = "P5Plate1"
         Me.P5Plate1.OutlineColor = System.Drawing.Color.Black
         Me.P5Plate1.PlateColor = System.Drawing.Color.White
         Me.P5Plate1.PlateImage = Nothing
         Me.P5Plate1.PlateShape = DupalcoOOP.P5PlateShape.Ransom
-        Me.P5Plate1.Size = New System.Drawing.Size(347, 158)
+        Me.P5Plate1.Size = New System.Drawing.Size(651, 232)
         Me.P5Plate1.StartDelay = 300
         Me.P5Plate1.TabIndex = 8
         Me.P5Plate1.TabStop = False
@@ -71,17 +72,18 @@ Partial Class Form1
         'P5Plate4
         '
         Me.P5Plate4.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate4.AutoFit = False
         Me.P5Plate4.BackColor = System.Drawing.Color.Transparent
         Me.P5Plate4.Font = New System.Drawing.Font("Segoe UI", 28.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle))
         Me.P5Plate4.ForeColor = System.Drawing.Color.White
-        Me.P5Plate4.Location = New System.Drawing.Point(24, 1098)
+        Me.P5Plate4.Location = New System.Drawing.Point(48, 1037)
         Me.P5Plate4.Margin = New System.Windows.Forms.Padding(6)
         Me.P5Plate4.Name = "P5Plate4"
         Me.P5Plate4.OutlineColor = System.Drawing.Color.Black
         Me.P5Plate4.PlateColor = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(15, Byte), Integer), CType(CType(45, Byte), Integer))
         Me.P5Plate4.PlateImage = Nothing
         Me.P5Plate4.PlateShape = DupalcoOOP.P5PlateShape.Ribbon
-        Me.P5Plate4.Size = New System.Drawing.Size(462, 127)
+        Me.P5Plate4.Size = New System.Drawing.Size(1077, 255)
         Me.P5Plate4.StartDelay = 1200
         Me.P5Plate4.TabIndex = 7
         Me.P5Plate4.TabStop = False
@@ -91,17 +93,18 @@ Partial Class Form1
         'P5Plate3
         '
         Me.P5Plate3.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate3.AutoFit = False
         Me.P5Plate3.BackColor = System.Drawing.Color.Transparent
         Me.P5Plate3.Font = New System.Drawing.Font("Segoe UI", 21.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.P5Plate3.ForeColor = System.Drawing.Color.White
-        Me.P5Plate3.Location = New System.Drawing.Point(193, 875)
+        Me.P5Plate3.Location = New System.Drawing.Point(138, 756)
         Me.P5Plate3.Margin = New System.Windows.Forms.Padding(6)
         Me.P5Plate3.Name = "P5Plate3"
         Me.P5Plate3.OutlineColor = System.Drawing.Color.Black
         Me.P5Plate3.PlateColor = System.Drawing.Color.Black
         Me.P5Plate3.PlateImage = Nothing
         Me.P5Plate3.PlateShape = DupalcoOOP.P5PlateShape.Ransom
-        Me.P5Plate3.Size = New System.Drawing.Size(235, 119)
+        Me.P5Plate3.Size = New System.Drawing.Size(662, 233)
         Me.P5Plate3.StartDelay = 900
         Me.P5Plate3.TabIndex = 5
         Me.P5Plate3.TabStop = False
@@ -110,18 +113,19 @@ Partial Class Form1
         'P5Plate2
         '
         Me.P5Plate2.AccentColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.P5Plate2.AutoFit = False
         Me.P5Plate2.BackColor = System.Drawing.Color.Transparent
         Me.P5Plate2.Font = New System.Drawing.Font("Segoe UI", 28.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle))
         Me.P5Plate2.ForeColor = System.Drawing.Color.White
         Me.P5Plate2.ImageDarken = 140
-        Me.P5Plate2.Location = New System.Drawing.Point(24, 662)
+        Me.P5Plate2.Location = New System.Drawing.Point(836, 813)
         Me.P5Plate2.Margin = New System.Windows.Forms.Padding(6)
         Me.P5Plate2.Name = "P5Plate2"
         Me.P5Plate2.OutlineColor = System.Drawing.Color.Black
         Me.P5Plate2.OutlineWidth = 3
         Me.P5Plate2.PlateColor = System.Drawing.Color.White
         Me.P5Plate2.PlateImage = Nothing
-        Me.P5Plate2.Size = New System.Drawing.Size(661, 127)
+        Me.P5Plate2.Size = New System.Drawing.Size(1277, 212)
         Me.P5Plate2.StartDelay = 600
         Me.P5Plate2.TabIndex = 3
         Me.P5Plate2.TabStop = False

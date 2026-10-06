@@ -40,6 +40,11 @@ Public Class Form1
                 o.LoadTopic(text)
                 o.ShowDialog(Me)
                 Return
+
+            Case "Topic 1", "Priests and Devils", "3 Priests and 3 Devils", "Priests & Devils", "Animation"
+                Dim animForm As New AnimationForm()
+                animForm.ShowDialog(Me)
+                Return
         End Select
 
         Dim f As New LessonForm()
@@ -74,6 +79,10 @@ Public Class Form1
     End Sub
 
     Private Sub P5Backdrop1_Paint(sender As Object, e As PaintEventArgs) Handles P5Backdrop1.Paint
+
+    End Sub
+
+    Private Sub P5Plate3_Click(sender As Object, e As EventArgs) Handles P5Plate3.Click
 
     End Sub
 End Class

@@ -339,6 +339,7 @@ Public Class P5Menu
 
     Protected Overrides Sub OnHandleCreated(e As EventArgs)
         MyBase.OnHandleCreated(e)
+
         If Not DesignMode Then
             ' top-level items enter one after another when the app starts
             For k = 0 To roots.Count - 1
